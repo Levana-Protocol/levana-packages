@@ -9,8 +9,7 @@
   "scripts": {
     "dev": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts --watch",
     "build": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts",
-    "lint": "biome check",
-    "publish": "yarn publish --no-git-tag-version"
+    "lint": "biome check"
   },
   "exports": {
     "./color": {

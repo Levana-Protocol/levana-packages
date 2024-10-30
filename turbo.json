@@ -14,10 +14,6 @@
       "dependsOn": ["^lint"],
       "outputs": [],
       "cache": false
-    },
-    "publish": {
-      "dependsOn": ["build"],
-      "outputs": []
     }
   }
 }
