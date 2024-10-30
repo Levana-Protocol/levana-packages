@@ -1,0 +1,35 @@
+name: Levana Packages
+
+on: push
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Yarn cache
+        uses: actions/cache@v3
+        with:
+          path: ./.yarn
+          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: |
+            yarn-cache-folder-
+
+      - name: Install
+        run: |
+          yarn install
+          yarn setup
+
+      - name: Type Checking
+        run: yarn types
+
+      - name: Code Quality
+        run: yarn lint
+

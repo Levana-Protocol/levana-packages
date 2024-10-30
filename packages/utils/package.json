@@ -1,0 +1,51 @@
+{
+  "name": "@levana/utils",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts --watch",
+    "build": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts",
+    "lint": "biome check",
+    "publish": "yarn publish --no-git-tag-version"
+  },
+  "exports": {
+    "./color": {
+      "types": "./src/color.ts",
+      "default": "./dist/color.js"
+    },
+    "./date": {
+      "types": "./src/date.ts",
+      "default": "./dist/date.js"
+    },
+    "./lazyLoad": {
+      "types": "./src/lazyLoad.ts",
+      "default": "./dist/lazyLoad.js"
+    },
+    "./modal": {
+      "types": "./src/modal.tsx",
+      "default": "./dist/modal.js"
+    },
+    "./object": {
+      "types": "./src/object.ts",
+      "default": "./dist/object.js"
+    },
+    "./react": {
+      "types": "./src/react.ts",
+      "default": "./dist/react.js"
+    }
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "zustand": "4.5.2"
+  },
+  "devDependencies": {
+    "@levana/typescript-config": "workspace:*",
+    "@types/react": "18.3.2",
+    "tsup": "8.3.5",
+    "typescript": "5.4.5"
+  }
+}
