@@ -11,7 +11,9 @@
     "build": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts",
     "lint": "biome check"
   },
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "exports": {
     "./AdaptiveList": {
       "types": "./src/AdaptiveList.tsx",
