@@ -11,9 +11,7 @@
     "build": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts",
     "lint": "biome check"
   },
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "exports": {
     "./color": {
       "types": "./src/color.ts",
