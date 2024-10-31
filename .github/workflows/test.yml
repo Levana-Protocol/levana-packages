@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             yarn-cache-folder-
 
-      - name: Install
+      - name: Install Dependencies
         run: yarn install
 
       - name: Code Quality
