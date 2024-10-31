@@ -1,6 +1,6 @@
 {
   "name": "@levana-protocol/utils",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "license": "MIT",
   "type": "module",
   "publishConfig": {
