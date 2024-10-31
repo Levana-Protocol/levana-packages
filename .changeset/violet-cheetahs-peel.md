@@ -1,4 +1,4 @@
 ---
-"@levana-protocol/ui": patch
 "@levana-protocol/utils": patch
+"@levana-protocol/ui": patch
 ---

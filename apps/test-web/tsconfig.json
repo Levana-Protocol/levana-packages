@@ -1,9 +1,0 @@
-{
-  "extends": "@levana-protocol/typescript-config/react-app.json",
-  "include": ["src"],
-  "exclude": ["dist", "node_modules"],
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist"
-  }
-}
