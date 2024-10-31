@@ -5,7 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "version": "changeset version && yarn",
+    "prepare": "changeset version && yarn",
     "release": "turbo run build lint && yarn version && changeset publish"
   },
   "devDependencies": {
