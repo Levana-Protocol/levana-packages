@@ -23,7 +23,7 @@ jobs:
             yarn-cache-folder-
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Code Quality
         run: yarn lint

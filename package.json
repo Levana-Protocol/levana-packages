@@ -16,7 +16,10 @@
     "node": ">=18"
   },
   "packageManager": "yarn@4.5.1",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "dependencies": {
     "@changesets/cli": "2.27.9"
   }
