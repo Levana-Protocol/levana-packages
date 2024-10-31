@@ -14,7 +14,7 @@ import {
   forwardRef,
   useCallback,
 } from "react"
-import { useModal, useModalTopKey } from "@levana/utils/modal"
+import { useModal, useModalTopKey } from "@levana-protocol/utils/modal"
 
 import type { OmitComponentProps } from "./types"
 import { muiMergeSx } from "./utils/mui"

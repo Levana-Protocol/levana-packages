@@ -7,7 +7,7 @@ import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
 import useSlot from "@mui/joy/utils/useSlot"
 import type { OverrideProps } from "@mui/types"
 import { forwardRef, useState, useTransition } from "react"
-import type { PropsWithFunctionChildren } from "@levana/utils/react"
+import type { PropsWithFunctionChildren } from "@levana-protocol/utils/react"
 
 interface SettingsInputSlots {
   root?: React.ElementType

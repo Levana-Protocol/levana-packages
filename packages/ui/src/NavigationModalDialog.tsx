@@ -12,7 +12,7 @@ import useSlot from "@mui/joy/utils/useSlot"
 import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
 import type { OverrideProps } from "@mui/types"
 import { Fragment, useCallback, forwardRef } from "react"
-import { useModal } from "@levana/utils/modal"
+import { useModal } from "@levana-protocol/utils/modal"
 
 import HelperButton, { type HelperButtonAction } from "./HelperButton"
 import NavigationModalHeader from "./NavigationModalHeader"

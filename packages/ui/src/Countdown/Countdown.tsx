@@ -3,7 +3,10 @@ import Stack, { type StackProps } from "@mui/joy/Stack"
 import useSlot from "@mui/joy/utils/useSlot"
 import { styled, useThemeProps } from "@mui/joy/styles"
 import { forwardRef, useEffect, useState } from "react"
-import { getTimediffSplitDHMS, getTimediffSplitHMS } from "@levana/utils/date"
+import {
+  getTimediffSplitDHMS,
+  getTimediffSplitHMS,
+} from "@levana-protocol/utils/date"
 
 import type { CountdownProps } from "./CountdownProps"
 

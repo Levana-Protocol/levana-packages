@@ -7,7 +7,7 @@ import Option from "@mui/joy/Option"
 import Typography from "@mui/joy/Typography"
 import { type PropsWithChildren, useState, useEffect, useRef } from "react"
 import type Sortable from "sortablejs"
-import { deepCopy } from "@levana/utils/object"
+import { deepCopy } from "@levana-protocol/utils/object"
 
 import NavigationModal, { NavigationModalDynamicItem } from "./NavigationModal"
 
