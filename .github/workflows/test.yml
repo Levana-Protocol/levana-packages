@@ -14,16 +14,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Yarn Cache
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ./.yarn
-      #     key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-      #     restore-keys: |
-      #       yarn-cache-folder-
+      - name: Yarn Cache
+        uses: actions/cache@v3
+        with:
+          path: ./.yarn
+          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: |
+            yarn-cache-folder-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name: Code Quality
         run: yarn lint
