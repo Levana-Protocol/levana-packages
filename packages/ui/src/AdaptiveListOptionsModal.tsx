@@ -1,13 +1,13 @@
+import { deepCopy } from "@levana-protocol/utils/object"
 import Button from "@mui/joy/Button"
 import Chip from "@mui/joy/Chip"
-import Stack from "@mui/joy/Stack"
-import Select from "@mui/joy/Select"
-import SvgIcon, { type SvgIconProps } from "@mui/joy/SvgIcon"
 import Option from "@mui/joy/Option"
+import Select from "@mui/joy/Select"
+import Stack from "@mui/joy/Stack"
+import SvgIcon, { type SvgIconProps } from "@mui/joy/SvgIcon"
 import Typography from "@mui/joy/Typography"
-import { type PropsWithChildren, useState, useEffect, useRef } from "react"
+import { type PropsWithChildren, useEffect, useRef, useState } from "react"
 import type Sortable from "sortablejs"
-import { deepCopy } from "@levana/utils/object"
 
 import NavigationModal, { NavigationModalDynamicItem } from "./NavigationModal"
 

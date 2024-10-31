@@ -1,9 +1,9 @@
 import IconButton from "@mui/joy/IconButton"
 import ModalClose, { type ModalCloseProps } from "@mui/joy/ModalClose"
-import type { SxProps } from "@mui/joy/styles/types"
 import { styled, useThemeProps } from "@mui/joy/styles"
-import useSlot from "@mui/joy/utils/useSlot"
+import type { SxProps } from "@mui/joy/styles/types"
 import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
+import useSlot from "@mui/joy/utils/useSlot"
 import type { OverrideProps } from "@mui/types"
 import { forwardRef } from "react"
 

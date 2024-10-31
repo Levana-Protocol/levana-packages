@@ -1,5 +1,5 @@
 {
-  "extends": "@levana/typescript-config/react-library.json",
+  "extends": "@levana-protocol/typescript-config/react-library.json",
   "include": ["src"],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {

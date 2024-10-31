@@ -1,11 +1,11 @@
 import IconButton from "@mui/joy/IconButton"
 import Typography, { typographyClasses } from "@mui/joy/Typography"
-import useSlot from "@mui/joy/utils/useSlot"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef, useState } from "react"
 
-import ArrowsIcon from "../icons/ArrowsIcon"
 import FormInput from "../FormInput/FormInput"
+import ArrowsIcon from "../icons/ArrowsIcon"
 import type {
   FormToggleInputOwnerState,
   FormToggleInputProps,

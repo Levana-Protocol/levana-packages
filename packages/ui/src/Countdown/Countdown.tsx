@@ -1,9 +1,12 @@
-import Typography from "@mui/joy/Typography"
+import {
+  getTimediffSplitDHMS,
+  getTimediffSplitHMS,
+} from "@levana-protocol/utils/date"
 import Stack, { type StackProps } from "@mui/joy/Stack"
-import useSlot from "@mui/joy/utils/useSlot"
+import Typography from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef, useEffect, useState } from "react"
-import { getTimediffSplitDHMS, getTimediffSplitHMS } from "@levana/utils/date"
 
 import type { CountdownProps } from "./CountdownProps"
 

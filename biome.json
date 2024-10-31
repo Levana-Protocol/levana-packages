@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
   "organizeImports": {
-    "enabled": false
+    "include": ["apps/*/src/**", "packages/*/src/**"]
   },
   "linter": {
     "enabled": true,
@@ -24,25 +24,11 @@
       },
       "complexity": {}
     },
-    "ignore": [
-      "!apps/**",
-      "!packages/**",
-      "node_modules/**",
-      "dist/**",
-      ".turbo/**",
-      ".next/**"
-    ]
+    "include": ["apps/*/src/**", "packages/*/src/**"]
   },
   "formatter": {
     "indentStyle": "space",
-    "ignore": [
-      "!apps/**",
-      "!packages/**",
-      "node_modules/**",
-      "dist/**",
-      ".turbo/**",
-      ".next/**"
-    ]
+    "include": ["apps/*/src/**", "packages/*/src/**"]
   },
   "javascript": {
     "formatter": {

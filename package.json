@@ -4,7 +4,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "release": "turbo run build lint && changeset version && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -15,10 +16,7 @@
     "node": ">=18"
   },
   "packageManager": "yarn@4.5.1",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "dependencies": {
     "@changesets/cli": "2.27.9"
   }

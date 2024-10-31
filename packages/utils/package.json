@@ -1,5 +1,5 @@
 {
-  "name": "@levana/utils",
+  "name": "@levana-protocol/utils",
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
@@ -9,9 +9,11 @@
   "scripts": {
     "dev": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts --watch",
     "build": "tsup src/**/*.{ts,tsx} --format cjs,esm --dts",
-    "lint": "biome check",
-    "publish": "yarn publish --no-git-tag-version"
+    "lint": "biome check"
   },
+  "files": [
+    "dist/"
+  ],
   "exports": {
     "./color": {
       "types": "./src/color.ts",
@@ -43,7 +45,7 @@
     "zustand": "4.5.2"
   },
   "devDependencies": {
-    "@levana/typescript-config": "workspace:*",
+    "@levana-protocol/typescript-config": "0.0.1",
     "@types/react": "18.3.2",
     "tsup": "8.3.5",
     "typescript": "5.4.5"

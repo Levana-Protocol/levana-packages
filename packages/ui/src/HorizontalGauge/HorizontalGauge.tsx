@@ -1,8 +1,8 @@
 import Box from "@mui/joy/Box"
-import Typography from "@mui/joy/Typography"
 import Stack from "@mui/joy/Stack"
-import useSlot from "@mui/joy/utils/useSlot"
+import Typography from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef } from "react"
 
 import { muiMergeSx } from "../utils/mui"

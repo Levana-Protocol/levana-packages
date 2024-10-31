@@ -1,12 +1,12 @@
+import Button, { buttonClasses } from "@mui/joy/Button"
 import ButtonGroup from "@mui/joy/ButtonGroup"
 import Slider from "@mui/joy/Slider"
-import useSlot from "@mui/joy/utils/useSlot"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef } from "react"
-import Button, { buttonClasses } from "@mui/joy/Button"
 
-import type { ButtonSliderProps } from "./ButtonSliderProps"
 import { getAriaLabel } from "../utils/accessibility"
+import type { ButtonSliderProps } from "./ButtonSliderProps"
 
 export * from "./ButtonSliderProps"
 

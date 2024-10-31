@@ -1,23 +1,21 @@
+import { useModal, useModalTopKey } from "@levana-protocol/utils/modal"
 import Modal from "@mui/joy/Modal"
-import type { SxProps } from "@mui/joy/styles/types"
-import useSlot from "@mui/joy/utils/useSlot"
 import { styled, useThemeProps } from "@mui/joy/styles"
-import type { SlotProps, CreateSlotsAndSlotProps } from "@mui/joy/utils/types"
+import type { SxProps } from "@mui/joy/styles/types"
+import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
+import useSlot from "@mui/joy/utils/useSlot"
 import type { OverrideProps } from "@mui/types"
 import {
-  useState,
-  useRef,
-  useEffect,
-  createContext,
-  useContext,
   type PropsWithChildren,
+  createContext,
   forwardRef,
   useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
 } from "react"
-import { useModal, useModalTopKey } from "@levana/utils/modal"
 
-import type { OmitComponentProps } from "./types"
-import { muiMergeSx } from "./utils/mui"
 import NavigationModalDialog, {
   type NavigationModalRequiredProps,
   type NavigationModalDialogProps,
@@ -26,6 +24,8 @@ import NavigationModalDialog, {
   type NavigationModalStackItem,
 } from "./NavigationModalDialog"
 import PreventUnmounting from "./PreventUnmounting"
+import type { OmitComponentProps } from "./types"
+import { muiMergeSx } from "./utils/mui"
 
 interface NavigationModalSlots {
   root?: React.ElementType

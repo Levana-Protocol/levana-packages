@@ -6,8 +6,8 @@ import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
 import type { OverrideProps } from "@mui/types"
 
 import type {
-  FormInputProps,
   FormInputDataProps,
+  FormInputProps,
 } from "../FormInput/FormInputProps"
 
 export interface FormToggleInputSlots {

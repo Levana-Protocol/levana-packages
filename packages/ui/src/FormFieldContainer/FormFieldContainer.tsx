@@ -1,7 +1,7 @@
 import FormControl from "@mui/joy/FormControl"
 import FormHelperText from "@mui/joy/FormHelperText"
-import useSlot from "@mui/joy/utils/useSlot"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef } from "react"
 
 import type {

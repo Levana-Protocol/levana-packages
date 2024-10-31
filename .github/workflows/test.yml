@@ -8,8 +8,8 @@ defaults:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             yarn-cache-folder-
 
-      - name: Install
+      - name: Install Dependencies
         run: yarn install
 
       - name: Code Quality

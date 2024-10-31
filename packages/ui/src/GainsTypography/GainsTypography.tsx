@@ -1,6 +1,6 @@
 import Typography from "@mui/joy/Typography"
-import useSlot from "@mui/joy/utils/useSlot"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef } from "react"
 
 import type { GainsTypographyProps } from "./GainsTypographyProps"
