@@ -5,7 +5,8 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "release": "turbo run build lint && changeset version && yarn && changeset publish"
+    "version": "changeset version && yarn",
+    "release": "turbo run build lint && yarn version && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
