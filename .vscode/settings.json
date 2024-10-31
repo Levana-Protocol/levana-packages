@@ -10,8 +10,8 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "never"
+    "source.organizeImports.biome": "explicit",
+    "quickfix.biome": "explicit"
   },
   "search.exclude": {
     "**/.yarn": true,

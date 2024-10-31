@@ -1,8 +1,8 @@
-import Typography from "@mui/joy/Typography"
-import Stack from "@mui/joy/Stack"
 import Skeleton from "@mui/joy/Skeleton"
-import useSlot from "@mui/joy/utils/useSlot"
+import Stack from "@mui/joy/Stack"
+import Typography from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef } from "react"
 
 import GainsTypography from "../GainsTypography/GainsTypography"

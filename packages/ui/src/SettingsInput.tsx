@@ -1,13 +1,13 @@
+import type { PropsWithFunctionChildren } from "@levana-protocol/utils/react"
 import Input, { type InputProps, inputClasses } from "@mui/joy/Input"
 import Stack, { type StackProps } from "@mui/joy/Stack"
 import Typography, { type TypographyProps } from "@mui/joy/Typography"
-import type { SxProps } from "@mui/joy/styles/types"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import type { SxProps } from "@mui/joy/styles/types"
 import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
 import useSlot from "@mui/joy/utils/useSlot"
 import type { OverrideProps } from "@mui/types"
 import { forwardRef, useState, useTransition } from "react"
-import type { PropsWithFunctionChildren } from "@levana-protocol/utils/react"
 
 interface SettingsInputSlots {
   root?: React.ElementType

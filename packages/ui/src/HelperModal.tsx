@@ -1,8 +1,8 @@
 import Typography from "@mui/joy/Typography"
 
-import LightbulbIcon from "./icons/LightbulbIcon"
 import NavigationModal, { NavigationModalDynamicItem } from "./NavigationModal"
 import type { NavigationModalItem } from "./NavigationModalDialog"
+import LightbulbIcon from "./icons/LightbulbIcon"
 
 export type HelperModalProps = Pick<
   HelperModalDynamicItemProps,

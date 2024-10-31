@@ -1,8 +1,8 @@
 import Box from "@mui/joy/Box"
-import Typography from "@mui/joy/Typography"
 import Input, { inputClasses } from "@mui/joy/Input"
-import useSlot from "@mui/joy/utils/useSlot"
+import Typography from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
+import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef, useEffect, useRef, useState } from "react"
 
 import type { FormInputOwnerState, FormInputProps } from "./FormInputProps"

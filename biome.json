@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
   "organizeImports": {
-    "enabled": false
+    "ignore": ["node_modules/**", "dist/**"]
   },
   "linter": {
     "enabled": true,
@@ -29,8 +29,7 @@
       "!packages/**",
       "node_modules/**",
       "dist/**",
-      ".turbo/**",
-      ".next/**"
+      ".turbo/**"
     ]
   },
   "formatter": {
@@ -40,8 +39,7 @@
       "!packages/**",
       "node_modules/**",
       "dist/**",
-      ".turbo/**",
-      ".next/**"
+      ".turbo/**"
     ]
   },
   "javascript": {

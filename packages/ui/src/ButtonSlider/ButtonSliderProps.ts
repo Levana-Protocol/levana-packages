@@ -1,7 +1,7 @@
 import type { Mark } from "@mui/base"
 import type ButtonGroup from "@mui/joy/ButtonGroup"
 import type Slider from "@mui/joy/Slider"
-import type { Theme, StyleOverrides, ColorPaletteProp } from "@mui/joy/styles"
+import type { ColorPaletteProp, StyleOverrides, Theme } from "@mui/joy/styles"
 import type { SxProps } from "@mui/joy/styles/types"
 import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
 import type { OverrideProps } from "@mui/types"

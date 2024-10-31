@@ -1,21 +1,21 @@
-import type { ColorSystemOptions } from "@mui/joy/styles/extendTheme"
-import type {
-  PaletteBackground,
-  PaletteText,
-  PaletteCommon,
-  PaletteNeutral,
-  PalettePrimary,
-  PaletteDanger,
-  PaletteSuccess,
-  PaletteWarning,
-} from "@mui/joy/styles/types"
-import { extendTheme } from "@mui/joy/styles"
 import { buttonClasses } from "@mui/joy/Button"
 import { checkboxClasses } from "@mui/joy/Checkbox"
 import { inputClasses } from "@mui/joy/Input"
-import { sliderClasses } from "@mui/joy/Slider"
-import { sheetClasses } from "@mui/joy/Sheet"
 import { listItemButtonClasses } from "@mui/joy/ListItemButton"
+import { sheetClasses } from "@mui/joy/Sheet"
+import { sliderClasses } from "@mui/joy/Slider"
+import { extendTheme } from "@mui/joy/styles"
+import type { ColorSystemOptions } from "@mui/joy/styles/extendTheme"
+import type {
+  PaletteBackground,
+  PaletteCommon,
+  PaletteDanger,
+  PaletteNeutral,
+  PalettePrimary,
+  PaletteSuccess,
+  PaletteText,
+  PaletteWarning,
+} from "@mui/joy/styles/types"
 import "@fontsource/barlow-semi-condensed/400.css"
 import "@fontsource/barlow-semi-condensed/500.css"
 import "@fontsource/barlow-semi-condensed/600.css"
@@ -24,9 +24,9 @@ import "@fontsource/montserrat/500.css"
 import "@fontsource/montserrat/600.css"
 import "@fontsource/montserrat/700.css"
 
-import type { ColorRange, CssVarsData } from "./types"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
+import type { ColorRange, CssVarsData } from "./types"
 
 const dangerColor: ColorRange = {
   50: "#FEF2F7",

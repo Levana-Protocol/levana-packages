@@ -1,9 +1,9 @@
+import { lazyLoad } from "@levana-protocol/utils/lazyLoad"
+import type { PropsWithFunctionChildren } from "@levana-protocol/utils/react"
 import CssBaseline from "@mui/joy/CssBaseline"
 import GlobalStyles from "@mui/joy/GlobalStyles"
 import { CssVarsProvider } from "@mui/joy/styles"
-import { useEffect, useState, type PropsWithChildren } from "react"
-import type { PropsWithFunctionChildren } from "@levana-protocol/utils/react"
-import { lazyLoad } from "@levana-protocol/utils/lazyLoad"
+import { type PropsWithChildren, useEffect, useState } from "react"
 
 import BreakpointDetection from "../BreakpointDetection"
 import type { CssVarsData } from "./types"

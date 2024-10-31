@@ -1,8 +1,8 @@
+import { lazyLoad } from "@levana-protocol/utils/lazyLoad"
+import { useModal } from "@levana-protocol/utils/modal"
 import IconButton, { type IconButtonProps } from "@mui/joy/IconButton"
 import type React from "react"
 import { forwardRef } from "react"
-import { lazyLoad } from "@levana-protocol/utils/lazyLoad"
-import { useModal } from "@levana-protocol/utils/modal"
 
 import QuestionMarkIcon from "./icons/QuestionMarkIcon"
 import { muiMergeSx } from "./utils/mui"

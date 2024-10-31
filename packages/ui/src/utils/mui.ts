@@ -1,5 +1,5 @@
-import type { SystemStyleObject } from "@mui/system/styleFunctionSx"
 import type { SxProps, Theme } from "@mui/joy/styles/types/theme"
+import type { SystemStyleObject } from "@mui/system/styleFunctionSx"
 
 export type MuiOverridableComponentProps<
   Props,
