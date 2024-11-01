@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-# Create and checkout a new branch for the update
-git checkout -b update-yarn-lock
-
 # Run yarn install
 yarn install --mode update-lockfile
 
@@ -17,21 +14,8 @@ if ! git diff --exit-code yarn.lock; then
   git add yarn.lock
   git commit -m "update yarn.lock"
   
-  # Push the changes to the new branch
-  git push -u origin update-yarn-lock
-  
-  # Switch back to main and pull the latest changes
-  git checkout main
-  git pull origin main
-
-  # Merge the update branch into main
-  git merge update-yarn-lock
-
-  # Push the updated main branch
-  git push origin main
-
-  # Cleanup
-  git branch -D update-yarn-lock
+  # Push the changes to the pull request branch
+  git push
 else
   echo "No changes in yarn.lock; nothing to commit."
 fi
