@@ -18,6 +18,9 @@ jobs:
     outputs:
       publish: ${{ steps.check_merge.outputs.merged }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Check if changeset-release/main was merged
         id: check_merge
         run: |
