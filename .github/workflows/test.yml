@@ -29,7 +29,7 @@ jobs:
       # - name: Code Quality
       #   run: yarn lint
 
-      - name: Yarn Lock Changes
-        uses: Simek/yarn-lock-changes@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Yarn Lock Changes
+      #   uses: Simek/yarn-lock-changes@main
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
