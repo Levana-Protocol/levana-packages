@@ -16,10 +16,10 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set Node.js 16.x
+      - name: Set Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18
 
       - name: Run local script to update yarn.lock
         run: ./.ci/update-yarn-lock.sh
