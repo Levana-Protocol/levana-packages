@@ -3,6 +3,8 @@ name: Levana Packages
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    branches-ignore:
+      - main
 
 defaults:
   run:
