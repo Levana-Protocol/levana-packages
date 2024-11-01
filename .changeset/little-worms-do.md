@@ -1,0 +1,3 @@
+---
+"@levana-protocol/utils": patch
+---
