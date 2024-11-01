@@ -28,7 +28,7 @@ jobs:
       - name: Check if changeset-release/main was merged
         id: check_merge
         run: |
-          if git log -1 --pretty=%B | grep -q 'Merge pull request.*from test/main'; then
+          if git log -1 --oneline | grep -q 'test/main'; then
             echo "changeset-release branch was merged."
             echo "::set-output name=merged::true"
           else
