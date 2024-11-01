@@ -20,8 +20,8 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
         
-      # - name: Install Dependencies
-      #   run: ./.ci/update-yarn-lock.sh
+      - name: Install Dependencies
+        run: ./.ci/update-yarn-lock.sh
 
       # - name: Install Dependencies
       #   run: yarn install --mode update-lockfile
