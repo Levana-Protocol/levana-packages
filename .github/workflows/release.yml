@@ -35,9 +35,9 @@ jobs:
             echo "::set-output name=merged::false"
           fi
 
-      - name: Sync Dependencies
+      - name: Install Dependencies
         if: steps.check_merge.outputs.merged == 'true'
-        run: ./.ci/update-yarn-lock.sh
+        run: yarn install --mode update-lockfile
         
       - name: Install Dependencies
         if: steps.check_merge.outputs.merged == 'false'
@@ -47,7 +47,11 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
           publish: yarn release
+
+      - name: Sync Dependencies
+        if: steps.check_merge.outputs.merged == 'true'
+        run: ./.ci/update-yarn-lock.sh
