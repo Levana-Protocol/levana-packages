@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: 18
 
-      # - name: Run local script to update yarn.lock
-      #   run: ./.ci/update-yarn-lock.sh
+      - name: Run local script to update yarn.lock
+        run: ./.ci/update-yarn-lock.sh
 
-      - name: Install Dependencies
-        run: yarn install --mode update-lockfile
+      # - name: Install Dependencies
+      #   run: yarn install --mode update-lockfile
 
       # - name: Code Quality
       #   run: yarn lint
