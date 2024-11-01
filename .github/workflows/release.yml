@@ -12,18 +12,12 @@ defaults:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    name: Release
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.check_merge.outputs.merged }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js 20.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-
       - name: Check if changeset-release/main was merged
         id: check_merge
         run: |
@@ -35,23 +29,70 @@ jobs:
             echo "::set-output name=merged::false"
           fi
 
+  release_pull_request:
+    name: Release Pull Request
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.publish == 'false'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
       - name: Install Dependencies
-        if: steps.check_merge.outputs.merged == 'true'
-        run: yarn install --mode update-lockfile
-        
-      - name: Install Dependencies
-        if: steps.check_merge.outputs.merged == 'false'
         run: yarn install
 
-      - name: Create Release Pull Request or Publish to NPM
-        id: changesets
+      - name: Manage Release Pull Request
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  setup_release:
+    name: Setup Release
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.publish == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync Dependencies
+        # This step might push a commit and could trigger another run causing a 
+        # new pull request to be created. If that happens, make the 
+        # release_pull_request job conditional on the commit message not saying
+        # "update yarn.lock", which is set in update-yarn-lock.sh.
+        run: ./.ci/update-yarn-lock.sh
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [setup, setup_release]
+    if: needs.setup.outputs.publish == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Pull Latest Changes
+        run: git pull origin main
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Publish to NPM
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
           publish: yarn release
-
-      - name: Sync Dependencies
-        if: steps.check_merge.outputs.merged == 'true'
-        run: ./.ci/update-yarn-lock.sh
