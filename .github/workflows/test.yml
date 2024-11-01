@@ -14,19 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          ref: ${{ github.head_ref }}
 
-      # - name: Set Node.js 16.x
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 16.x
-
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
         with:
-          cmd: install
+          node-version: 16.x
+
+      - name: Run local script to update yarn.lock
+        run: ./.ci/update-yarn-lock.sh
 
       # - name: Install Dependencies
       #   run: yarn install
