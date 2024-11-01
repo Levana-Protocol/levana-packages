@@ -1,6 +1,28 @@
 # Levana UI
 
+A collection of components for Levana applications.
+
+The Levana UI library uses [Joy UI](https://mui.com/joy-ui/getting-started/) as a base layer. If you're looking for a component that doesn't exist here, check the components in Joy UI.
+
+## Setup
+
+To work with Levana UI, just include the `ThemeProvider` at the root of the application.
+
+```ts
+import ThemeProvider from "@levana-protocol/ui/ThemeProvider"
+
+const Main = () => {
+  return (
+    <ThemeProvider variant="levana">
+      ...
+    </ThemeProvider>
+  )
+}
+```
+
 ## Slots and SlotProps
+
+Here's some helpful tips when creating new components.
 
 ### Accessing inherited props from the parent SlotProps
 
