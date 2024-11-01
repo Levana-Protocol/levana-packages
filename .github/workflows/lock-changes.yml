@@ -3,6 +3,8 @@ name: Lock Changes
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    branches:
+      - test
 
 defaults:
   run:

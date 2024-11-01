@@ -24,11 +24,10 @@ jobs:
         with:
           node-version: 20.x
 
-
       - name: Check if changeset-release/main was merged
         id: check_merge
         run: |
-          if git log -1 --oneline | grep -q 'test/main'; then
+          if git log -1 --oneline | grep -q 'changeset-release/main'; then
             echo "changeset-release branch was merged."
             echo "::set-output name=merged::true"
           else
@@ -36,23 +35,19 @@ jobs:
             echo "::set-output name=merged::false"
           fi
 
-      - name: Run conditional step
+      - name: Sync Dependencies
         if: steps.check_merge.outputs.merged == 'true'
-        run: echo "Changeset-release br"
-
-      - name: Run conditional step
-        if: steps.check_merge.outputs.merged == 'false'
-        run: echo "Nope"
-
-
+        run: ./.ci/update-yarn-lock.sh
+        
       - name: Install Dependencies
+        if: steps.check_merge.outputs.merged == 'false'
         run: yarn install
 
-      # - name: Create Release Pull Request or Publish to NPM
-      #   id: changesets
-      #   uses: changesets/action@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   with:
-      #     publish: yarn release
+      - name: Create Release Pull Request or Publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        with:
+          publish: yarn release
