@@ -1,15 +1,6 @@
 name: Prepare Release
 
-on:
-  push:
-    branches:
-      - main
-      - changeset-release/main
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
-      - changeset-release/main
+on: push
 
 defaults:
   run:
