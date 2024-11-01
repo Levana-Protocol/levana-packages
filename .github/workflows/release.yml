@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    shell: bash
+
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
