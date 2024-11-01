@@ -2,7 +2,7 @@
 set -e
 
 # Run yarn install
-yarn install #--mode update-lockfile
+yarn install --mode update-lockfile
 
 # Check for changes in yarn.lock
 if ! git diff --exit-code yarn.lock; then
