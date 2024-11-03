@@ -26,10 +26,10 @@ jobs:
         run: |
           if git log -1 --oneline | grep -q 'changeset-release/main'; then
             echo "changeset-release branch was merged."
-            echo "::set-output name=merged::true"
+            echo "merged=true" >> $GITHUB_OUTPUT
           else
             echo "changeset-release branch was not merged."
-            echo "::set-output name=merged::false"
+            echo "merged=false" >> $GITHUB_OUTPUT
           fi
 
   release_pull_request:
@@ -64,6 +64,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Sync Dependencies
+        env:
+          PAT: ${{ secrets.BOT_GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
         # This step might push a commit and could trigger another run causing a 
         # new pull request to be created. If that happens, make the 
         # release_pull_request job conditional on the commit message not saying
@@ -97,5 +100,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        with:
-          publish: yarn release
+        # with:
+        #   publish: yarn release
