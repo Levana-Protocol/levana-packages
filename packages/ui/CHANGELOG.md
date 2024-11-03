@@ -1,5 +1,13 @@
 # @levana-protocol/ui
 
+## 0.0.4
+
+### Patch Changes
+
+- db5a318:
+- Updated dependencies [db5a318]
+  - @levana-protocol/utils@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
