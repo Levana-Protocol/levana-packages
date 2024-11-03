@@ -1,11 +1,5 @@
 # @levana-protocol/utils
 
-## 0.0.4
-
-### Patch Changes
-
-- eda77f1:
-
 ## 0.0.3
 
 ### Patch Changes

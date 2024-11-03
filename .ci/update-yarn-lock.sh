@@ -12,16 +12,16 @@ if ! git diff --exit-code yarn.lock; then
   # git config --global user.email "bot@levana.finance"
   # git remote set-url origin https://$PAT@github.com/$REPOSITORY
 
-  echo "print config"
-  echo $(git config --get user.name)
-  echo $(git config --get user.email)
+  # echo "print config"
+  # echo $(git config --get user.name)
+  # echo $(git config --get user.email)
 
   # Commit changes to yarn.lock
   git add yarn.lock
   git commit -m "update yarn.lock"
   
-  echo "print log"
-  echo $(git --no-pager log -1 --format="%H %an <%ae> %ad %s" --date=short)
+  # echo "print log"
+  # echo $(git --no-pager log -1 --format="%H %an <%ae> %ad %s" --date=short)
 
   echo "lets push"
   # Push the changes to the pull request branch
