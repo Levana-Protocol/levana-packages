@@ -66,13 +66,6 @@ jobs:
           ssh-key: ${{ secrets.SSH_UPDATE_YARN_LOCK }}
 
       - name: Sync Dependencies
-        env:
-          PAT: ${{ secrets.BOT_GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
-        # This step might push a commit and could trigger another run causing a 
-        # new pull request to be created. If that happens, make the 
-        # release_pull_request job conditional on the commit message not saying
-        # "update yarn.lock", which is set in update-yarn-lock.sh.
         run: ./.ci/update-yarn-lock.sh
 
   release:

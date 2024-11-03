@@ -1,13 +1,5 @@
 # @levana-protocol/ui
 
-## 0.0.4
-
-### Patch Changes
-
-- a9ff75b:
-- Updated dependencies [a9ff75b]
-  - @levana-protocol/utils@0.0.4
-
 ## 0.0.3
 
 ### Patch Changes
