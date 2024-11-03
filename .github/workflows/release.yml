@@ -62,6 +62,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.SSH_UPDATE_YARN_LOCK }}
 
       - name: Sync Dependencies
         env:
