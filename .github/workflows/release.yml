@@ -95,5 +95,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        # with:
-        #   publish: yarn release
+        with:
+          publish: yarn release
