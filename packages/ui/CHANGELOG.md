@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.0
+
+### Minor Changes
+
+- 9f53e40: Fixed the styling of plain input fields
+
 ## 0.0.3
 
 ### Patch Changes
