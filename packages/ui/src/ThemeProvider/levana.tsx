@@ -665,6 +665,12 @@ const theme = extendTheme({
       styleOverrides: {
         root: {
           "--variant-borderWidth": "2px",
+          [`&.${inputClasses.variantPlain}`]: {
+            backgroundColor: "transparent",
+            [`&.${inputClasses.focused}`]: {
+              "--Input-focusedHighlight": "transparent",
+            },
+          },
         },
         input: ({ theme }) => ({
           "::placeholder": {
