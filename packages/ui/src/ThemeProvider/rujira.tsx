@@ -265,8 +265,8 @@ const dark = ((): ColorSystemOptions => {
       gradient: {
         primary: `
           linear-gradient(
-            90deg, 
-            rgba(214, 21, 235, var(--variant-alpha, 1)) 0%, 
+            90deg,
+            rgba(214, 21, 235, var(--variant-alpha, 1)) 0%,
             rgba(132, 54, 245, var(--variant-alpha, 1)) 100%
           )
           `,
@@ -602,6 +602,12 @@ const theme = extendTheme({
       styleOverrides: {
         root: {
           "--variant-borderWidth": "2px",
+          [`&.${inputClasses.variantPlain}`]: {
+            backgroundColor: "transparent",
+            [`&.${inputClasses.focused}`]: {
+              "--Input-focusedHighlight": "transparent",
+            },
+          },
         },
         input: ({ theme }) => ({
           "::placeholder": {
