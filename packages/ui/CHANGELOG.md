@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.1
+
+### Patch Changes
+
+- 8f30adb: Add selected state to AdaptiveList items.
+
 ## 0.1.0
 
 ### Minor Changes
