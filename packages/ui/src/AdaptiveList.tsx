@@ -91,7 +91,7 @@ const AdaptiveListRoot = styled("table", {
     theme.vars.palette.neutral.plainHoverBg,
   "--AdaptiveList-selectedBackgroundColor":
     theme.vars.palette.neutral.plainActiveBg,
-  "--AdaptiveList-headerBackgroundColor": "",
+  "--AdaptiveList-headerBackgroundColor": theme.vars.palette.background.body,
   [theme.breakpoints.down(ownerState.minTableLayout)]: {
     "&, & tbody": {
       display: "block",
