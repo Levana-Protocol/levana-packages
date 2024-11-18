@@ -59,6 +59,7 @@ interface AdaptiveListReservedItem {
    * will not display.
    */
   footer?: AdaptiveListFooterItem
+  selected?: boolean
   onClick?: () => void
 }
 
@@ -72,6 +73,7 @@ interface AdaptiveListOwnerState {
 }
 
 interface AdaptiveListContentOwnerState extends AdaptiveListOwnerState {
+  isSelected: boolean
   hasOnClick: boolean
 }
 
@@ -84,6 +86,12 @@ const AdaptiveListRoot = styled("table", {
   "--AdaptiveList-columnGap": theme.spacing(1),
   "--AdaptiveList-rowGap": theme.spacing(1),
   "--AdaptiveList-padding": theme.spacing(2),
+  "--AdaptiveList-backgroundColor": theme.vars.palette.background.level1,
+  "--AdaptiveList-hoverBackgroundColor":
+    theme.vars.palette.neutral.plainHoverBg,
+  "--AdaptiveList-selectedBackgroundColor":
+    theme.vars.palette.neutral.plainActiveBg,
+  "--AdaptiveList-headerBackgroundColor": "",
   [theme.breakpoints.down(ownerState.minTableLayout)]: {
     "&, & tbody": {
       display: "block",
@@ -156,15 +164,18 @@ const AdaptiveListRowContent = styled("tr", {
     flexWrap: "wrap",
     flexGrow: 1,
     justifyContent: "space-between",
-    backgroundColor: theme.vars.palette.background.level1,
+    backgroundColor: "var(--AdaptiveList-backgroundColor)",
     rowGap: theme.spacing(3),
     columnGap: "var(--AdaptiveList-columnGap)",
     borderTopLeftRadius: theme.radius.md,
     borderTopRightRadius: theme.radius.md,
+    ...(ownerState.isSelected && {
+      backgroundColor: "var(--AdaptiveList-selectedBackgroundColor)",
+    }),
     ...(ownerState.hasOnClick && {
       "&:hover, &:hover + .footer td > *, &:has(+ .footer:hover)": {
         cursor: "pointer",
-        backgroundColor: theme.vars.palette.background.level2,
+        backgroundColor: "var(--AdaptiveList-hoverBackgroundColor)",
       },
     }),
     "& td": {
@@ -175,7 +186,7 @@ const AdaptiveListRowContent = styled("tr", {
     display: "table-row",
     "& td": {
       display: "table-cell",
-      backgroundColor: theme.vars.palette.background.level1,
+      backgroundColor: "var(--AdaptiveList-backgroundColor)",
       verticalAlign: "middle",
       "&:first-of-type": {
         borderTopLeftRadius: theme.radius.md,
@@ -186,11 +197,14 @@ const AdaptiveListRowContent = styled("tr", {
       [`&:has(.${checkboxClasses.root}, .${buttonClasses.root})`]: {
         position: "relative",
       },
+      ...(ownerState.isSelected && {
+        backgroundColor: "var(--AdaptiveList-selectedBackgroundColor)",
+      }),
     },
     ...(ownerState.hasOnClick && {
       "&:hover td, &:hover + .footer td > *, &:has(+ .footer:hover) td": {
         cursor: "pointer",
-        backgroundColor: theme.vars.palette.background.level2,
+        backgroundColor: "var(--AdaptiveList-hoverBackgroundColor)",
       },
     }),
   },
@@ -201,9 +215,12 @@ const AdaptiveListRowFooter = styled("tr", {
   slot: "rowFooter",
 })<{ ownerState: AdaptiveListContentOwnerState }>(({ theme, ownerState }) => ({
   "& td > *": {
-    backgroundColor: theme.vars.palette.background.level1,
+    backgroundColor: "var(--AdaptiveList-backgroundColor)",
     borderBottomLeftRadius: theme.radius.md,
     borderBottomRightRadius: theme.radius.md,
+    ...(ownerState.isSelected && {
+      backgroundColor: "var(--AdaptiveList-selectedBackgroundColor)",
+    }),
   },
   [theme.breakpoints.down(ownerState.minTableLayout)]: {
     display: "flex",
@@ -221,7 +238,7 @@ const AdaptiveListRowFooter = styled("tr", {
   ...(ownerState.hasOnClick && {
     "&:hover td > *": {
       cursor: "pointer",
-      backgroundColor: theme.vars.palette.background.level2,
+      backgroundColor: "var(--AdaptiveList-hoverBackgroundColor)",
     },
   }),
 }))
@@ -252,16 +269,16 @@ const AdaptiveList = <Id extends string>(props: AdaptiveListProps<Id>) => {
     <AdaptiveListRoot ownerState={ownerState} sx={sx}>
       <Box
         component="thead"
-        sx={({ vars }) => ({
+        sx={{
           display: {
             xs: "none",
             [minTableLayout]: "table-header-group",
           },
           position: "sticky",
           top: 0,
-          backgroundColor: vars.palette.background.body,
+          backgroundColor: "var(--AdaptiveList-headerBackgroundColor)",
           zIndex: 10,
-        })}
+        }}
       >
         <Box component="tr">
           {sections.map((section) => (
@@ -283,13 +300,13 @@ const AdaptiveList = <Id extends string>(props: AdaptiveListProps<Id>) => {
               ownerState={contentOwnerState(ownerState, item)}
               onClick={(event) => handleItemClick(event, item)}
             >
-              {contentItemKeys(item, sections).map((id) => (
+              {contentItemEntries(item, sections).map(([id, value]) => (
                 <AdaptiveListCellContainer
                   key={id}
                   section={sectionForId(id)}
                   itemIndex={index}
                   minTableLayout={minTableLayout}
-                  {...item[id as keyof typeof item]}
+                  {...value}
                 />
               ))}
             </AdaptiveListRowContent>
@@ -411,21 +428,22 @@ const contentOwnerState = (
 ): AdaptiveListContentOwnerState => {
   return {
     ...ownerState,
+    isSelected: item.selected === true,
     hasOnClick: item.onClick !== undefined,
   }
 }
 
-const contentItemKeys = (
-  items: Record<string, unknown> & AdaptiveListReservedItem,
+const contentItemEntries = (
+  items: Record<string, AdaptiveListItem> & AdaptiveListReservedItem,
   sections: AdaptiveListSection<string>[],
-) => {
+): [string, AdaptiveListItem][] => {
   // Remove reserved keys from the `otherItems`
-  const { footer: _1, onClick: _2, ...otherItems } = items
-  return Object.keys(otherItems)
-    .filter((key) => {
+  const { footer: _1, selected: _2, onClick: _3, ...otherItems } = items
+  return Object.entries(otherItems)
+    .filter(([key]) => {
       return sections.find((section) => section.id === key)
     })
-    .sort((aId, bId) => {
+    .sort(([aId], [bId]) => {
       const aIndex = sections.findIndex((section) => section.id === aId)
       const bIndex = sections.findIndex((section) => section.id === bId)
       return aIndex - bIndex
