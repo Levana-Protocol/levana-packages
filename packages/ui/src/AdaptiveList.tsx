@@ -2,31 +2,62 @@ import Box, { type BoxProps } from "@mui/joy/Box"
 import { buttonClasses } from "@mui/joy/Button"
 import { checkboxClasses } from "@mui/joy/Checkbox"
 import Stack from "@mui/joy/Stack"
+import SvgIcon, { type SvgIconProps } from "@mui/joy/SvgIcon"
 import Typography from "@mui/joy/Typography"
 import { type Theme, styled } from "@mui/joy/styles"
 import type { Breakpoint } from "@mui/system/createTheme"
 import type { SystemStyleObject } from "@mui/system/styleFunctionSx"
 import type React from "react"
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 
+import { IconButton } from "@mui/joy"
 import HelperButton, { type HelperButtonModalProps } from "./HelperButton"
 
 type AdaptiveListHelperButtonAction =
   | {
       /**
-       * The `itemIndex` will not exist for the table layout
+       * The `itemIndex` will not exist for the table layout.
        */
       onClick: (itemIndex?: number) => void
     }
   | { modal: HelperButtonModalProps }
 
+export interface AdaptiveListSortSection {
+  /**
+   * Indicate this section to be active
+   *
+   * Only the active sort section should have a truthy value.
+   * If the value is `ascending`, an up arrow will be highlighted.
+   * If the value is `desending`, a down arrow will be highlighted.
+   * If the value is `true`, both arrows will be highlighted.
+   */
+  indicator?: boolean | "ascending" | "descending"
+  /**
+   * Is this section bi directional or uni directional
+   *
+   * @default true
+   */
+  biDirectional?: boolean
+  onSort: (ascending: boolean) => void
+}
+
 export interface AdaptiveListSection<Id extends string> {
   id: Id
   title?: string
   helper?: AdaptiveListHelperButtonAction
+  /**
+   * Sort by a section
+   *
+   * Setting this value will add a sort button next to the title. This is only
+   * for the table layout.
+   */
+  sort?: AdaptiveListSortSection
 }
 
 export interface AdaptiveListItem {
+  /**
+   * Hide the title when in the card layout.
+   */
   hideContentTitle?: boolean
   width?: ResponsiveItemWidthProps
   cell: React.ReactNode
@@ -65,7 +96,8 @@ interface AdaptiveListReservedItem {
 
 interface AdaptiveListOwnerState {
   /**
-   * The min breakpoint for the table layout
+   * The min breakpoint for the table layout. Anything below that will use the
+   * card layout.
    *
    * @default lg
    */
@@ -123,8 +155,7 @@ const AdaptiveListRoot = styled("table", {
       },
     },
     "& thead th": {
-      paddingTop: theme.spacing(1.5),
-      paddingBottom: theme.spacing(1.5),
+      height: theme.spacing(6),
       textAlign: "left",
     },
     "& tbody .content td": {
@@ -280,17 +311,7 @@ const AdaptiveList = <Id extends string>(props: AdaptiveListProps<Id>) => {
           zIndex: 10,
         }}
       >
-        <Box component="tr">
-          {sections.map((section) => (
-            <Box key={section.id} component="th">
-              <AdaptiveListTitle
-                endDecorator={<AdaptiveListHelperButton section={section} />}
-              >
-                {section.title}
-              </AdaptiveListTitle>
-            </Box>
-          ))}
-        </Box>
+        <AdaptiveListTableHeader sections={sections} />
       </Box>
       <Box component="tbody">
         {items.map((item, index) => (
@@ -326,6 +347,50 @@ const AdaptiveList = <Id extends string>(props: AdaptiveListProps<Id>) => {
   )
 }
 
+interface AdaptiveListSortData {
+  sectionId: string
+  ascending: boolean
+}
+
+interface AdaptiveListTableHeaderProps<Id extends string> {
+  sections: AdaptiveListProps<Id>["sections"]
+}
+
+const AdaptiveListTableHeader = <Id extends string>(
+  props: AdaptiveListTableHeaderProps<Id>,
+) => {
+  const sortDataState = useState<AdaptiveListSortData>()
+
+  return (
+    <Box component="tr">
+      {props.sections.map((section) => (
+        <Box key={section.id} component="th">
+          <AdaptiveListTitle
+            endDecorator={
+              <>
+                <AdaptiveListHelperButton section={section} />
+                <AdaptiveListSortButton
+                  section={section}
+                  sortDataState={sortDataState}
+                />
+              </>
+            }
+            slotProps={{
+              endDecorator: {
+                sx: {
+                  alignItems: "center",
+                },
+              },
+            }}
+          >
+            {section.title}
+          </AdaptiveListTitle>
+        </Box>
+      ))}
+    </Box>
+  )
+}
+
 interface AdaptiveListHelperButtonProps {
   section: AdaptiveListSection<string>
   itemIndex?: number
@@ -346,6 +411,96 @@ const AdaptiveListHelperButton = (props: AdaptiveListHelperButtonProps) => {
         ? { modal: helper.modal }
         : { onClick: () => helper.onClick(itemIndex) })}
     />
+  )
+}
+
+interface AdaptiveListSortButtonProps {
+  section: AdaptiveListSection<string>
+  sortDataState: ReturnType<typeof useState<AdaptiveListSortData>>
+}
+
+const AdaptiveListSortButton = (props: AdaptiveListSortButtonProps) => {
+  const { section } = props
+  const { id, sort } = section
+  const [sortData, setSortData] = props.sortDataState
+
+  useEffect(() => {
+    if (sort?.indicator) {
+      setSortData({
+        sectionId: id,
+        ascending: sort.indicator !== "descending",
+      })
+    }
+  }, [id, sort?.indicator, setSortData])
+
+  if (!sort) {
+    return null
+  }
+
+  const sortState =
+    sortData?.sectionId === id
+      ? sort.biDirectional
+        ? sortData.ascending
+          ? "ascending"
+          : "descending"
+        : "both"
+      : "none"
+
+  const handleSort = () => {
+    let sortAscending = sortData?.ascending ?? true
+
+    if (sortData?.sectionId === id && sort.biDirectional) {
+      sortAscending = !sortAscending
+    } else {
+      sortAscending = true
+    }
+
+    sort.onSort(sortAscending)
+  }
+
+  return (
+    <IconButton
+      size="sm"
+      onClick={handleSort}
+      sx={({ vars }) => ({
+        position: "relative",
+        "& > *": {
+          position: "absolute",
+          color: vars.palette.text.secondary,
+        },
+      })}
+    >
+      <SortUpArrow
+        sx={
+          sortState === "ascending" || sortState === "both"
+            ? ({ vars }) => ({ color: vars.palette.text.primary })
+            : undefined
+        }
+      />
+      <SortDownArrow
+        sx={
+          sortState === "descending" || sortState === "both"
+            ? ({ vars }) => ({ color: vars.palette.text.primary })
+            : undefined
+        }
+      />
+    </IconButton>
+  )
+}
+
+const SortUpArrow = (props: SvgIconProps) => {
+  return (
+    <SvgIcon {...props} viewBox="0 0 16 16">
+      <path d="M5.96667 6.03332L5 5.06665L8 2.06665L11 5.06665L10.0333 6.03332L8 3.99998L5.96667 6.03332Z" />
+    </SvgIcon>
+  )
+}
+
+const SortDownArrow = (props: SvgIconProps) => {
+  return (
+    <SvgIcon {...props} viewBox="0 0 16 16">
+      <path d="M5 11L8 14L11 11L10.0333 10.0333L8 12.0667L5.96667 10.0333L5 11Z" />
+    </SvgIcon>
   )
 }
 
