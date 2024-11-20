@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.2
+
+### Patch Changes
+
+- 60f185c: Add sort button to the AdaptiveList table layout
+
 ## 0.1.1
 
 ### Patch Changes
