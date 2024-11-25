@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.3
+
+### Patch Changes
+
+- f87292a: AdaptiveListTitle supports new line breaks
+
 ## 0.1.2
 
 ### Patch Changes
