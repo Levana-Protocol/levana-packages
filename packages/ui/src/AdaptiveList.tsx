@@ -182,6 +182,8 @@ const AdaptiveListTitle = styled(Typography, {
 })(({ theme }) => ({
   ...theme.typography["body-xs"],
   color: theme.vars.palette.text.secondary,
+  whiteSpace: "pre-line",
+  lineHeight: theme.vars.lineHeight.xs,
 }))
 
 const AdaptiveListRowContent = styled("tr", {
