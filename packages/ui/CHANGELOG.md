@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.4
+
+### Patch Changes
+
+- a263f68: Override Rujira global styles
+
 ## 0.1.3
 
 ### Patch Changes
