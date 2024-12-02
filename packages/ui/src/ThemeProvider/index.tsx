@@ -47,14 +47,14 @@ declare module "@mui/joy/ModalDialog" {
 }
 
 interface ThemeProviderProps {
-  variant: "levana" | "rujira"
+  brandId: "levana" | "rujira"
 }
 
 const ThemeProvider = (props: PropsWithChildren<ThemeProviderProps>) => {
   const { children } = props
 
   return (
-    <ThemeSelector variant={props.variant}>
+    <ThemeSelector brandId={props.brandId}>
       {(cssVarsData) => (
         <CssVarsProvider
           theme={cssVarsData.theme}
@@ -88,7 +88,7 @@ const ThemeSelector = (
   const [cssVarsData, setCssVarsData] = useState<CssVarsData>()
 
   useEffect(() => {
-    switch (props.variant) {
+    switch (props.brandId) {
       case "levana":
         lazyLoad(() => import("./levana")).then(setCssVarsData)
         break
@@ -96,7 +96,7 @@ const ThemeSelector = (
         lazyLoad(() => import("./rujira")).then(setCssVarsData)
         break
     }
-  }, [props.variant])
+  }, [props.brandId])
 
   if (!cssVarsData) {
     return null
