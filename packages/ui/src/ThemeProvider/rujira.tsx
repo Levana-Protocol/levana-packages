@@ -595,6 +595,10 @@ const theme = extendTheme({
       styleOverrides: {
         root: {
           "--variant-borderWidth": "2px",
+          // Override rujira.ui global styles
+          "&.toggle:before": {
+            display: "none",
+          },
         },
       },
     },
