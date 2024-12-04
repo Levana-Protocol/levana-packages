@@ -745,21 +745,26 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyTabs: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "unset",
+        },
+      },
+    },
     JoyTab: {
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
-          borderRadius: theme.vars.radius.sm,
-          color: theme.vars.palette.text.secondary,
-
+          "--variant-plainColor": theme.vars.palette.text.secondary,
+          "--variant-plainHoverColor": "#90A4AE",
+          "--ListItem-paddingX": "1rem",
+          "--ListItem-paddingY": "0",
+          "--ListItem-minHeight": "3rem",
+          "--Tab-indicatorThickness": "0",
+          borderRadius: "2rem",
           ...(ownerState.selected && {
-            borderBottomLeftRadius: "unset",
-            borderBottomRightRadius: "unset",
-            color: theme.vars.palette.text.primary,
+            "--variant-plainColor": theme.vars.palette.text.primary,
           }),
-
-          "&.Mui-selected": {
-            backgroundColor: "unset",
-          },
         }),
       },
     },
