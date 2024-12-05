@@ -762,6 +762,7 @@ const theme = extendTheme({
           "--ListItem-minHeight": "3rem",
           "--Tab-indicatorThickness": "0",
           borderRadius: "2rem",
+          flexShrink: 0,
           ...(ownerState.selected && {
             "--variant-plainColor": theme.vars.palette.text.primary,
           }),
