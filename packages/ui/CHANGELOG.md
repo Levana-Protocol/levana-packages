@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.5
+
+### Patch Changes
+
+- a921a5f: Rujira tab styling
+
 ## 0.1.4
 
 ### Patch Changes
