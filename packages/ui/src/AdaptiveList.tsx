@@ -82,7 +82,7 @@ export interface AdaptiveListProps<Id extends string>
   items: (Record<Id, AdaptiveListItem> & AdaptiveListReservedItem)[]
 }
 
-interface AdaptiveListReservedItem {
+export interface AdaptiveListReservedItem {
   /**
    * Display an item footer
    *
@@ -117,6 +117,7 @@ const AdaptiveListRoot = styled("table", {
 })<{ ownerState: AdaptiveListOwnerState }>(({ theme, ownerState }) => ({
   "--AdaptiveList-columnGap": theme.spacing(1),
   "--AdaptiveList-rowGap": theme.spacing(1),
+  "--AdaptiveList-borderRadius": theme.vars.radius.md,
   "--AdaptiveList-padding": theme.spacing(2),
   "--AdaptiveList-backgroundColor": theme.vars.palette.background.level1,
   "--AdaptiveList-hoverBackgroundColor":
@@ -133,17 +134,13 @@ const AdaptiveListRoot = styled("table", {
       paddingLeft: "var(--AdaptiveList-padding)",
       paddingRight: "var(--AdaptiveList-padding)",
     },
-    "& tbody .footer td > *": {
-      paddingLeft: "var(--AdaptiveList-padding)",
-      paddingRight: "var(--AdaptiveList-padding)",
-    },
   },
   [theme.breakpoints.up(ownerState.minTableLayout)]: {
     display: "table",
     borderCollapse: "separate",
     borderSpacing: 0,
     width: "100%",
-    "& thead tr, & tbody .content, & tbody .footer td": {
+    "& thead tr, & tbody .content": {
       "& > *": {
         paddingRight: "var(--AdaptiveList-columnGap)",
       },
@@ -168,10 +165,7 @@ const AdaptiveListRoot = styled("table", {
   "& tbody .footer td": {
     paddingBottom: "var(--AdaptiveList-rowGap)",
     "& > *": {
-      paddingBottom: "var(--AdaptiveList-padding)",
-      "&:has(:first-of-type)": {
-        paddingTop: "var(--AdaptiveList-padding)",
-      },
+      paddingTop: "var(--AdaptiveList-padding)",
     },
   },
 }))
@@ -200,8 +194,8 @@ const AdaptiveListRowContent = styled("tr", {
     backgroundColor: "var(--AdaptiveList-backgroundColor)",
     rowGap: theme.spacing(3),
     columnGap: "var(--AdaptiveList-columnGap)",
-    borderTopLeftRadius: theme.radius.md,
-    borderTopRightRadius: theme.radius.md,
+    borderTopLeftRadius: "var(--AdaptiveList-borderRadius)",
+    borderTopRightRadius: "var(--AdaptiveList-borderRadius)",
     ...(ownerState.isSelected && {
       backgroundColor: "var(--AdaptiveList-selectedBackgroundColor)",
     }),
@@ -222,10 +216,10 @@ const AdaptiveListRowContent = styled("tr", {
       backgroundColor: "var(--AdaptiveList-backgroundColor)",
       verticalAlign: "middle",
       "&:first-of-type": {
-        borderTopLeftRadius: theme.radius.md,
+        borderTopLeftRadius: "var(--AdaptiveList-borderRadius)",
       },
       "&:last-of-type": {
-        borderTopRightRadius: theme.radius.md,
+        borderTopRightRadius: "var(--AdaptiveList-borderRadius)",
       },
       [`&:has(.${checkboxClasses.root}, .${buttonClasses.root})`]: {
         position: "relative",
@@ -249,8 +243,8 @@ const AdaptiveListRowFooter = styled("tr", {
 })<{ ownerState: AdaptiveListContentOwnerState }>(({ theme, ownerState }) => ({
   "& td > *": {
     backgroundColor: "var(--AdaptiveList-backgroundColor)",
-    borderBottomLeftRadius: theme.radius.md,
-    borderBottomRightRadius: theme.radius.md,
+    borderBottomLeftRadius: "var(--AdaptiveList-borderRadius)",
+    borderBottomRightRadius: "var(--AdaptiveList-borderRadius)",
     ...(ownerState.isSelected && {
       backgroundColor: "var(--AdaptiveList-selectedBackgroundColor)",
     }),
@@ -339,7 +333,7 @@ const AdaptiveList = <Id extends string>(props: AdaptiveListProps<Id>) => {
               onClick={(event) => handleItemClick(event, item)}
             >
               <Box component="td" colSpan={Object.keys(item).length}>
-                {<Box>{item.footer?.cell}</Box>}
+                <Box>{item.footer?.cell}</Box>
               </Box>
             </AdaptiveListRowFooter>
           </Fragment>

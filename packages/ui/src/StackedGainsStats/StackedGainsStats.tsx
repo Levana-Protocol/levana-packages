@@ -1,4 +1,4 @@
-import Skeleton from "@mui/joy/Skeleton"
+import Skeleton, { type SkeletonProps } from "@mui/joy/Skeleton"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
@@ -34,6 +34,16 @@ const StackedGainsStatsStat = styled(GainsTypography, {
   flexGrow: 1,
 })
 
+const StackedGainsStatsSkeleton = styled(Skeleton, {
+  name,
+  slot: "skeleton",
+})({
+  maxWidth: 100,
+})
+
+/**
+ * @deprecated Use `StackedStats`
+ */
 const StackedGainsStats = forwardRef<HTMLDivElement, StackedGainsStatsProps>(
   function StackedGainsStats(inProps, ref) {
     const props = useThemeProps({ props: inProps, name })
@@ -66,27 +76,47 @@ const StackedGainsStats = forwardRef<HTMLDivElement, StackedGainsStatsProps>(
       externalForwardedProps,
     })
 
+    const [SlotSkeleton, skeletonProps] = useSlot("skeleton", {
+      ref,
+      className: "skeleton",
+      elementType: StackedGainsStatsSkeleton,
+      ownerState,
+      externalForwardedProps,
+      internalForwardedProps: {
+        variant: "text",
+      } satisfies SkeletonProps,
+    })
+
     return (
       <SlotRoot {...rootProps}>
-        {stats.map(({ title, value, gains }, index) => (
+        {stats.map((stat, index) => (
           <Stack
             key={index}
             direction="row"
             spacing={1}
             sx={{ width: "100%", alignItems: "center" }}
           >
-            <SlotTitle level="body-sm" {...titleProps}>
-              {title}
-            </SlotTitle>
-            <SlotStat level="body-sm" {...statProps} gains={gains}>
-              <Skeleton
-                loading={value === undefined}
-                variant="text"
+            {typeof stat === "object" && stat.title && (
+              <SlotTitle level="body-sm" {...titleProps}>
+                {stat.title}
+              </SlotTitle>
+            )}
+            <SlotStat
+              level="body-sm"
+              {...statProps}
+              gains={typeof stat === "object" ? stat.gains : undefined}
+            >
+              <SlotSkeleton
+                loading={
+                  typeof stat === "object"
+                    ? stat.value === undefined
+                    : stat === undefined
+                }
                 level={statProps.level ?? "body-sm"}
-                animation={false}
+                {...skeletonProps}
               >
-                {value}
-              </Skeleton>
+                {typeof stat === "object" ? stat.value : stat}
+              </SlotSkeleton>
             </SlotStat>
           </Stack>
         ))}

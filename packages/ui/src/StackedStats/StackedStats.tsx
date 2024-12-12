@@ -1,10 +1,15 @@
+import Skeleton, { type SkeletonProps } from "@mui/joy/Skeleton"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
 import useSlot from "@mui/joy/utils/useSlot"
 import { forwardRef } from "react"
 
-import type { StackedStatsProps } from "./StackedStatsProps"
+import GainsTypography from "../GainsTypography/GainsTypography"
+import type {
+  StackedStatsOwnerState,
+  StackedStatsProps,
+} from "./StackedStatsProps"
 
 export * from "./StackedStatsProps"
 
@@ -17,11 +22,21 @@ const StackedStatsRoot = styled(Stack, {
   alignItems: "baseline",
 })
 
-const StackedStatsMainStat = styled(Typography, {
+const StackedStatsTitle = styled(Typography, {
+  name,
+  slot: "title",
+})(({ theme }) => ({
+  color: theme.vars.palette.text.secondary,
+}))
+
+const StackedStatsMainStat = styled(GainsTypography, {
   name,
   slot: "mainStat",
-})(({ theme }) => ({
-  color: theme.vars.palette.text.primary,
+})<{ ownerState: StackedStatsOwnerState }>(({ theme, ownerState }) => ({
+  ...(!ownerState.isGainsStats && {
+    color: theme.vars.palette.text.primary,
+    width: "100%",
+  }),
 }))
 
 const StackedStatsOtherStat = styled(Typography, {
@@ -29,20 +44,39 @@ const StackedStatsOtherStat = styled(Typography, {
   slot: "otherState",
 })(({ theme }) => ({
   color: theme.vars.palette.text.secondary,
+  width: "100%",
 }))
+
+const StackedStatsSkeleton = styled(Skeleton, {
+  name,
+  slot: "skeleton",
+})({
+  maxWidth: 100,
+})
 
 const StackedStats = forwardRef<HTMLDivElement, StackedStatsProps>(
   function StackedStats(inProps, ref) {
     const props = useThemeProps({ props: inProps, name })
 
     const { ...otherProps } = props
-    const { stats, ...externalForwardedProps } = props
-    const ownerState = { ...otherProps }
+    const { stats, ...externalForwardedProps } = otherProps
+    const ownerState = {
+      ...otherProps,
+      isGainsStats: typeof stats.at(0) === "object",
+    }
 
     const [SlotRoot, rootProps] = useSlot("root", {
       ref,
       className: "root",
       elementType: StackedStatsRoot,
+      ownerState,
+      externalForwardedProps,
+    })
+
+    const [SlotTitle, titleProps] = useSlot("title", {
+      ref,
+      className: "title",
+      elementType: StackedStatsTitle,
       ownerState,
       externalForwardedProps,
     })
@@ -63,16 +97,69 @@ const StackedStats = forwardRef<HTMLDivElement, StackedStatsProps>(
       externalForwardedProps,
     })
 
+    const [SlotSkeleton, skeletonProps] = useSlot("skeleton", {
+      ref,
+      className: "skeleton",
+      elementType: StackedStatsSkeleton,
+      ownerState,
+      externalForwardedProps,
+      internalForwardedProps: {
+        variant: "text",
+      } satisfies SkeletonProps,
+    })
+
     return (
       <SlotRoot {...rootProps}>
         {stats.map((stat, index) =>
-          index === 0 ? (
+          typeof stat === "object" ? (
+            <Stack
+              key={index}
+              direction="row"
+              spacing={1}
+              sx={{
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              {stat.title && (
+                <SlotTitle level="body-sm" {...titleProps}>
+                  {stat.title}
+                </SlotTitle>
+              )}
+              <SlotMainStat
+                level="body-sm"
+                {...mainStatProps}
+                gains={stat.gains}
+              >
+                <SlotSkeleton
+                  loading={stat.value === undefined}
+                  level={mainStatProps.level ?? "body-sm"}
+                  {...skeletonProps}
+                >
+                  {stat.value}
+                </SlotSkeleton>
+              </SlotMainStat>
+            </Stack>
+          ) : index === 0 ? (
             <SlotMainStat key={index} level="body-sm" {...mainStatProps}>
-              {stat}
+              <SlotSkeleton
+                loading={stat === undefined}
+                level={"body-sm"}
+                {...skeletonProps}
+              >
+                {stat}
+              </SlotSkeleton>
             </SlotMainStat>
           ) : (
             <SlotOtherStat key={index} level="body-xs" {...otherStatProps}>
-              {stat}
+              <SlotSkeleton
+                loading={stat === undefined}
+                level={"body-xs"}
+                {...skeletonProps}
+              >
+                {stat}
+              </SlotSkeleton>
             </SlotOtherStat>
           ),
         )}

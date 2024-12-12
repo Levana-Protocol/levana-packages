@@ -19,6 +19,10 @@
       "types": "./src/AdaptiveList.tsx",
       "default": "./dist/AdaptiveList.js"
     },
+    "./AdaptiveListAccordionFooter": {
+      "types": "./src/AdaptiveListAccordionFooter.tsx",
+      "default": "./dist/AdaptiveListAccordionFooter.js"
+    },
     "./AdaptiveListHeader": {
       "types": "./src/AdaptiveListHeader.tsx",
       "default": "./dist/AdaptiveListHeader.js"
