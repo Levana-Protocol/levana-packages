@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.6
+
+### Patch Changes
+
+- 23126ee: Combine StackedStats components
+
 ## 0.1.5
 
 ### Patch Changes
