@@ -699,6 +699,22 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyListItemButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.variant === undefined && {
+            ...(ownerState.color === "primary" && {
+              "--color":
+                theme.palette.mode === "dark"
+                  ? theme.palette.primary[200]
+                  : theme.palette.primary[600],
+              "--variant-plainColor": "var(--color)",
+              "--variant-outlinedBorder": "var(--color)",
+            }),
+          }),
+        }),
+      }
+    },
     JoyModalClose: {
       styleOverrides: {
         root: {
