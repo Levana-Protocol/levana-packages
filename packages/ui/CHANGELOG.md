@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.8
+
+### Patch Changes
+
+- a5264ab: Update ListItemButton styling
+
 ## 0.1.7
 
 ### Patch Changes
