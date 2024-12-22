@@ -713,7 +713,7 @@ const theme = extendTheme({
             }),
           }),
         }),
-      }
+      },
     },
     JoyModalClose: {
       styleOverrides: {
