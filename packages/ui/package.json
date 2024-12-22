@@ -83,10 +83,6 @@
       "types": "./src/SettingsInput.tsx",
       "default": "./dist/SettingsInput.js"
     },
-    "./StackedGainsStats": {
-      "types": "./src/StackedGainsStats/StackedGainsStats.tsx",
-      "default": "./dist/StackedGainsStats/StackedGainsStats.js"
-    },
     "./StackedStats": {
       "types": "./src/StackedStats/StackedStats.tsx",
       "default": "./dist/StackedStats/StackedStats.js"
