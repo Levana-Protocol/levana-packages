@@ -1,10 +1,6 @@
 name: Levana Packages
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches-ignore:
-      - main
+on: push
 
 defaults:
   run:
