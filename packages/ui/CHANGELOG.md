@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.7
+
+### Patch Changes
+
+- 8b72383: Remove StackedGainsStats
+
 ## 0.1.6
 
 ### Patch Changes
