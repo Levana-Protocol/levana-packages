@@ -699,7 +699,7 @@ const theme = extendTheme({
         }),
       },
     },
-    JoyListItemButton: {
+    JoyListItem: {
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
           ...(ownerState.variant === "plain" && {
@@ -713,6 +713,24 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyListItemButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.variant === "plain" && {
+            ...(ownerState.color === "primary" && {
+              "--variant-plainColor":
+                theme.palette.mode === "dark"
+                  ? theme.palette.primary[200]
+                  : theme.palette.primary[600],
+            }),
+          }),
+          ...(ownerState.variant === "outlined" && {
+            "--variant-borderWidth": "2px",
+            borderRadius: theme.vars.radius.md,
+          }),
+        }),
+      },
+    },
     JoyListItemDecorator: {
       styleOverrides: {
         root: {
@@ -720,6 +738,27 @@ const theme = extendTheme({
             color: "var(--Icon-color)",
           },
         },
+      },
+    },
+    JoyMenu: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.vars.palette.background.level2,
+          boxShadow: "unset",
+        }),
+      },
+    },
+    JoyMenuItem: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.variant === "plain" &&
+            ownerState.color === "primary" && {
+              "--variant-plainColor":
+                theme.palette.mode === "dark"
+                  ? theme.palette.primary[200]
+                  : theme.palette.primary[600],
+            }),
+        }),
       },
     },
     JoyModalClose: {
