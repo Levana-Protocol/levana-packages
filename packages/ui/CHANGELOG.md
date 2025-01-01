@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.10
+
+### Patch Changes
+
+- 7e7e435: Add button styling to ListItemButton
+
 ## 0.1.9
 
 ### Patch Changes
