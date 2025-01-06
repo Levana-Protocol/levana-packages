@@ -1,7 +1,9 @@
 import { buttonClasses } from "@mui/joy/Button"
 import { checkboxClasses } from "@mui/joy/Checkbox"
 import { inputClasses } from "@mui/joy/Input"
+import { listDividerClasses } from "@mui/joy/ListDivider"
 import { listItemButtonClasses } from "@mui/joy/ListItemButton"
+import { listItemDecoratorClasses } from "@mui/joy/ListItemDecorator"
 import { sheetClasses } from "@mui/joy/Sheet"
 import { sliderClasses } from "@mui/joy/Slider"
 import { extendTheme } from "@mui/joy/styles"
@@ -637,6 +639,32 @@ const theme = extendTheme({
               "--variant-outlinedBorder": "var(--color)",
             }),
           }),
+        }),
+      },
+    },
+    JoyMenu: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "--variant-borderWidth": "0px",
+          backgroundColor: theme.vars.palette.background.body,
+          [`& .${listDividerClasses.root}`]: {
+            display: "none",
+          },
+          [`& .${listItemDecoratorClasses.root}`]: {
+            display: "none",
+          },
+        }),
+      },
+    },
+    JoyMenuItem: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "--background-color": "#71909f1f",
+          "--ListItem-minHeight": "0px",
+          "--variant-plainColor": theme.vars.palette.text.secondary,
+          "--variant-plainHoverColor": theme.vars.palette.text.primary,
+          "--variant-plainHoverBg": "var(--background-color)",
+          backgroundColor: "var(--background-color)",
         }),
       },
     },
