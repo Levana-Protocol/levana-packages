@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.11
+
+### Patch Changes
+
+- 7736b47: Update Rujira menu styling
+
 ## 0.1.10
 
 ### Patch Changes
