@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.12
+
+### Patch Changes
+
+- a1465a0: Update Rujira styles
+
 ## 0.1.11
 
 ### Patch Changes
