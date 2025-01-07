@@ -95,6 +95,8 @@ const warningColor: ColorRange = {
   900: "#332509",
 }
 
+const specialColor = "#d615eb"
+
 const dark = ((): ColorSystemOptions => {
   const common: Partial<PaletteCommon> = {
     black: "#000000",
@@ -124,7 +126,7 @@ const dark = ((): ColorSystemOptions => {
 
   const danger: Partial<PaletteDanger> = {
     ...dangerColor,
-    mainChannel: "229 37 116",
+    mainChannel: "237 105 160",
     outlinedActiveBg: dangerColor[700],
     outlinedBorder: dangerColor[700],
     outlinedColor: dangerColor[200],
@@ -265,13 +267,10 @@ const dark = ((): ColorSystemOptions => {
       text,
       divider: neutral.outlinedBorder,
       gradient: {
-        primary: `
-          linear-gradient(
-            90deg,
-            rgba(214, 21, 235, var(--variant-alpha, 1)) 0%,
-            rgba(132, 54, 245, var(--variant-alpha, 1)) 100%
-          )
-          `,
+        primary: `linear-gradient(90deg, 
+          ${specialColor} 0%,
+          ${primaryColor[500]} 100%
+        )`,
       },
       danger,
       neutral,
@@ -436,16 +435,6 @@ const theme = extendTheme({
             fontWeight: theme.vars.fontWeight.lg,
           }),
 
-          ...(ownerState["data-special"] === true && {
-            ...(!ownerState.disabled && {
-              background: theme.palette.gradient.primary,
-
-              "&:hover": {
-                "--variant-alpha": "0.5",
-              },
-            }),
-          }),
-
           ...(ownerState.variant === "plain" && {
             paddingInline: "0.5rem",
 
@@ -485,6 +474,17 @@ const theme = extendTheme({
             },
             "&:hover, &:active": {
               backgroundColor: "transparent",
+            },
+          }),
+
+          ...(ownerState["data-special"] === true && {
+            "--variant-solidDisabledColor": theme.vars.palette.text.primary,
+            background: theme.palette.gradient.primary,
+            ...(ownerState.disabled && {
+              opacity: 0.5,
+            }),
+            "&:hover": {
+              background: specialColor,
             },
           }),
         }),
@@ -727,7 +727,7 @@ const theme = extendTheme({
     },
     JoySlider: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ ownerState, theme }) => ({
           "--Slider-railBackground": theme.vars.palette.background.level3,
           "--Slider-thumbBackground": "var(--Slider-railBackground)",
 
@@ -738,17 +738,35 @@ const theme = extendTheme({
           [`&.${sliderClasses.sizeLg}`]: {
             "--Slider-trackSize": "8px",
           },
+
+          ...(ownerState["data-special"] === true && {
+            "--variant-solidBg": specialColor,
+            "--Slider-thumbBackground": specialColor,
+            "--Slider-trackBackground": theme.vars.palette.gradient.primary,
+            "&:hover": {
+              "--Slider-trackBackground": theme.vars.palette.gradient.primary,
+              [`& .${sliderClasses.track}`]: {
+                opacity: 0.75,
+              },
+            },
+            "&:active": {
+              "--Slider-trackBackground": theme.vars.palette.gradient.primary,
+              [`& .${sliderClasses.track}`]: {
+                opacity: 0.5,
+              },
+            },
+          }),
         }),
         track: {
+          background: "var(--Slider-trackBackground)",
           "&[style*='right:']": {
             borderRadius:
               "0 var(--Slider-trackRadius) var(--Slider-trackRadius) 0",
           },
         },
         thumb: {
-          [`.${sliderClasses.sizeLg} &:before`]: {
-            borderWidth:
-              "calc((var(--Slider-thumbWidth) - var(--Slider-trackSize)) / 2)",
+          "&:before": {
+            borderWidth: 0,
           },
           "&[style*='right:']": {
             transform: "translate(50%, -50%)",
@@ -787,7 +805,7 @@ const theme = extendTheme({
           "--variant-plainHoverColor": "#90A4AE",
           "--ListItem-paddingX": "1rem",
           "--ListItem-paddingY": "0",
-          "--ListItem-minHeight": "3rem",
+          "--ListItem-minHeight": "2rem",
           "--Tab-indicatorThickness": "0",
           borderRadius: "2rem",
           flexShrink: 0,
@@ -816,6 +834,7 @@ const theme = extendTheme({
             [`& .${buttonClasses.root}`]: {
               "--Button-radius": "var(--ToggleButtonGroup-radius)",
               "--variant-softBg": "transparent",
+              "--variant-softHoverBg": theme.vars.palette.neutral.plainHoverBg,
               "--unstable_childRadius": "var(--ToggleButtonGroup-radius)",
               border: 0,
               flex: 1,
