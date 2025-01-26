@@ -642,6 +642,16 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyListItemButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.variant === "outlined" && {
+            "--variant-borderWidth": "2px",
+            borderRadius: theme.vars.radius.md,
+          }),
+        }),
+      },
+    },
     JoyMenu: {
       styleOverrides: {
         root: ({ theme }) => ({
