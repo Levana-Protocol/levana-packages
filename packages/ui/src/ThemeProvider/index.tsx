@@ -32,6 +32,7 @@ declare module "@mui/joy/styles" {
   interface Palette {
     gradient: {
       primary: string
+      success: string
     }
   }
 
@@ -68,6 +69,9 @@ const ThemeProvider = (props: PropsWithChildren<ThemeProviderProps>) => {
                 display: "flex",
                 flexDirection: "column",
                 flexWrap: "nowrap",
+                ...(props.brandId === "rujira" && {
+                  background: `linear-gradient(180deg, ${cssVarsData.theme.vars.palette.background.body} 0, #0f1117 500px)`,
+                }),
               },
               ul: {
                 paddingInlineStart: "1.5rem",

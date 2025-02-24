@@ -1,23 +1,10 @@
 import type { Mark } from "@mui/base"
 import type ButtonGroup from "@mui/joy/ButtonGroup"
 import type Slider from "@mui/joy/Slider"
-import type { ColorPaletteProp, StyleOverrides, Theme } from "@mui/joy/styles"
+import type { ColorPaletteProp } from "@mui/joy/styles"
 import type { SxProps } from "@mui/joy/styles/types"
 import type { CreateSlotsAndSlotProps, SlotProps } from "@mui/joy/utils/types"
 import type { OverrideProps } from "@mui/types"
-
-declare module "@mui/joy/styles" {
-  interface Components {
-    LevanaButtonSlider?: {
-      defaultProps?: Partial<ButtonSliderProps>
-      styleOverrides?: StyleOverrides<
-        keyof ButtonSliderSlots,
-        ButtonSliderOwnerState,
-        Theme
-      >
-    }
-  }
-}
 
 export interface ButtonSliderSlots {
   root?: React.ElementType

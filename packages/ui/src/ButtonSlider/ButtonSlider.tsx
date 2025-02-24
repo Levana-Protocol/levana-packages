@@ -15,12 +15,9 @@ const name = "LevanaButtonSlider"
 const ButtonSliderRoot = styled("div", {
   name,
   slot: "root",
-})(({ theme }) => ({
-  padding: theme.spacing(0, 1),
-  backgroundColor: theme.vars.palette.background.level2,
-  borderRadius: theme.vars.radius.sm,
+})({
   lineHeight: 0,
-}))
+})
 
 const ButtonSliderSlider = styled(Slider, {
   name,
@@ -32,8 +29,6 @@ const ButtonSliderButtonGroup = styled(ButtonGroup, {
   slot: "buttonGroup",
 })(({ theme, size }) => ({
   "--ButtonGroup-radius": theme.vars.radius.lg,
-  paddingTop: theme.spacing(0.5),
-  paddingBottom: theme.spacing(1),
   ...(size === "sm" && {
     "--Button-minHeight": theme.spacing(3),
     [`.${buttonClasses.root}`]: {

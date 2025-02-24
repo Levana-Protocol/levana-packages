@@ -50,9 +50,9 @@ const neutralColor: ColorRange = {
   300: "#857BB3",
   400: "#625A88",
   500: "#7367A6",
-  600: "#433B6A",
-  700: "#3A3454",
-  800: "#161720",
+  600: "#2E3844",
+  700: "#22242E",
+  800: "#161621",
   900: "#0C0C11",
 }
 
@@ -74,8 +74,8 @@ const successColor: ColorRange = {
   100: "#DDF4EC",
   200: "#B7E7D6",
   300: "#90DBC0",
-  400: "#6ACEAA",
-  500: "#5DFBD0",
+  400: "#5DFBD0",
+  500: "#44C194",
   600: "#349E78",
   700: "#27785B",
   800: "#1A523E",
@@ -95,7 +95,16 @@ const warningColor: ColorRange = {
   900: "#332509",
 }
 
-const specialColor = "#d615eb"
+const specialPrimaryColor = "#d615eb"
+const specialBlueColor = "#4490dc"
+const specialTealColor = "#8DF7D2"
+
+const createGradientSuccess = (deg = "90deg") => {
+  return `linear-gradient(${deg}, 
+    ${specialBlueColor} 0%,
+    ${specialTealColor} 100%
+  )`
+}
 
 const dark = ((): ColorSystemOptions => {
   const common: Partial<PaletteCommon> = {
@@ -105,7 +114,7 @@ const dark = ((): ColorSystemOptions => {
 
   const background: Partial<PaletteBackground> = {
     backdrop: "rgba(0 0 0 / 0.25)",
-    body: "#0C0A0F",
+    body: "#161721",
     level1: neutralColor[800],
     level2: "#221F32",
     level3: neutralColor[700],
@@ -268,9 +277,10 @@ const dark = ((): ColorSystemOptions => {
       divider: neutral.outlinedBorder,
       gradient: {
         primary: `linear-gradient(90deg, 
-          ${specialColor} 0%,
+          ${specialPrimaryColor} 0%,
           ${primaryColor[500]} 100%
         )`,
+        success: createGradientSuccess(),
       },
       danger,
       neutral,
@@ -479,12 +489,12 @@ const theme = extendTheme({
 
           ...(ownerState["data-special"] === true && {
             "--variant-solidDisabledColor": theme.vars.palette.text.primary,
-            background: theme.palette.gradient.primary,
+            background: theme.palette.gradient.success,
             ...(ownerState.disabled && {
               opacity: 0.5,
             }),
             "&:hover": {
-              background: specialColor,
+              background: specialBlueColor,
             },
           }),
         }),
@@ -750,19 +760,30 @@ const theme = extendTheme({
           },
 
           ...(ownerState["data-special"] === true && {
-            "--variant-solidBg": specialColor,
-            "--Slider-thumbBackground": specialColor,
-            "--Slider-trackBackground": theme.vars.palette.gradient.primary,
+            "--variant-solidBg": specialTealColor,
+            "--Slider-thumbBackground": specialTealColor,
+            "--Slider-trackBackground": createGradientSuccess(),
+            [`&:not(.${sliderClasses.disabled}) .${sliderClasses.track}`]: {
+              "&[style*='right:']": {
+                "--Slider-trackBackground": createGradientSuccess("270deg"),
+              },
+            },
             "&:hover": {
-              "--Slider-trackBackground": theme.vars.palette.gradient.primary,
+              "--Slider-trackBackground": createGradientSuccess(),
               [`& .${sliderClasses.track}`]: {
                 opacity: 0.75,
+                "&[style*='right:']": {
+                  "--Slider-trackBackground": createGradientSuccess("270deg"),
+                },
               },
             },
             "&:active": {
-              "--Slider-trackBackground": theme.vars.palette.gradient.primary,
+              "--Slider-trackBackground": createGradientSuccess(),
               [`& .${sliderClasses.track}`]: {
                 opacity: 0.5,
+                "&[style*='right:']": {
+                  "--Slider-trackBackground": createGradientSuccess("270deg"),
+                },
               },
             },
           }),
@@ -838,7 +859,7 @@ const theme = extendTheme({
           ...(ownerState.variant === "soft" && {
             "--variant-borderWidth": "2px",
             "--ToggleButtonGroup-gap": "var(--variant-borderWidth)",
-            "--ToggleButtonGroup-radius": theme.vars.radius.sm,
+            "--ToggleButtonGroup-radius": "2rem",
             "--ButtonGroup-separatorSize": "0",
             gap: "calc(2 * var(--ToggleButtonGroup-gap))",
             [`& .${buttonClasses.root}`]: {

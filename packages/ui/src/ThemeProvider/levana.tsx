@@ -5,6 +5,7 @@ import { listItemButtonClasses } from "@mui/joy/ListItemButton"
 import { sheetClasses } from "@mui/joy/Sheet"
 import { sliderClasses } from "@mui/joy/Slider"
 import { extendTheme } from "@mui/joy/styles"
+import type { StyleOverrides, Theme } from "@mui/joy/styles"
 import type { ColorSystemOptions } from "@mui/joy/styles/extendTheme"
 import type {
   PaletteBackground,
@@ -17,9 +18,27 @@ import type {
   PaletteWarning,
 } from "@mui/joy/styles/types"
 
+import type {
+  ButtonSliderOwnerState,
+  ButtonSliderProps,
+  ButtonSliderSlots,
+} from "../ButtonSlider/ButtonSliderProps"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
+
+declare module "@mui/joy/styles" {
+  interface Components {
+    LevanaButtonSlider?: {
+      defaultProps?: Partial<ButtonSliderProps>
+      styleOverrides?: StyleOverrides<
+        keyof ButtonSliderSlots,
+        ButtonSliderOwnerState,
+        Theme
+      >
+    }
+  }
+}
 
 const dangerColor: ColorRange = {
   50: "#fef2f7",
@@ -468,6 +487,19 @@ const theme = extendTheme({
     snackbar: 1000000, // Above Zendesk button
   },
   components: {
+    LevanaButtonSlider: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          padding: theme.spacing(0, 1),
+          backgroundColor: theme.vars.palette.background.level2,
+          borderRadius: theme.vars.radius.sm,
+        }),
+        buttonGroup: ({ theme }) => ({
+          paddingTop: theme.spacing(0.5),
+          paddingBottom: theme.spacing(1),
+        }),
+      },
+    },
     JoyAvatar: {
       styleOverrides: {
         root: {
