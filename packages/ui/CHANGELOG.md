@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.14
+
+### Patch Changes
+
+- 63c60c2: Rujira theme updates
+
 ## 0.1.13
 
 ### Patch Changes
