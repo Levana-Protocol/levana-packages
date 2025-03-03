@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.15
+
+### Patch Changes
+
+- e2b5bed: Rujira drawer styling
+
 ## 0.1.14
 
 ### Patch Changes
