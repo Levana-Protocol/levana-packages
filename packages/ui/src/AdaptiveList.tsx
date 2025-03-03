@@ -94,7 +94,7 @@ export interface AdaptiveListReservedItem {
   onClick?: () => void
 }
 
-interface AdaptiveListOwnerState {
+export interface AdaptiveListOwnerState {
   /**
    * The min breakpoint for the table layout. Anything below that will use the
    * card layout.
@@ -118,13 +118,6 @@ const AdaptiveListRoot = styled("table", {
   "--AdaptiveList-columnGap": theme.spacing(1),
   "--AdaptiveList-rowGap": theme.spacing(1),
   "--AdaptiveList-borderRadius": theme.vars.radius.md,
-  "--AdaptiveList-padding": theme.spacing(2),
-  "--AdaptiveList-backgroundColor": theme.vars.palette.background.level1,
-  "--AdaptiveList-hoverBackgroundColor":
-    theme.vars.palette.neutral.plainHoverBg,
-  "--AdaptiveList-selectedBackgroundColor":
-    theme.vars.palette.neutral.plainActiveBg,
-  "--AdaptiveList-headerBackgroundColor": theme.vars.palette.background.body,
   [theme.breakpoints.down(ownerState.minTableLayout)]: {
     "&, & tbody": {
       display: "block",

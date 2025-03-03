@@ -6,7 +6,7 @@ import { listItemButtonClasses } from "@mui/joy/ListItemButton"
 import { listItemDecoratorClasses } from "@mui/joy/ListItemDecorator"
 import { sheetClasses } from "@mui/joy/Sheet"
 import { sliderClasses } from "@mui/joy/Slider"
-import { extendTheme } from "@mui/joy/styles"
+import { type StyleOverrides, type Theme, extendTheme } from "@mui/joy/styles"
 import type { ColorSystemOptions } from "@mui/joy/styles/extendTheme"
 import type {
   PaletteBackground,
@@ -26,9 +26,25 @@ import "@fontsource/montserrat/500.css"
 import "@fontsource/montserrat/600.css"
 import "@fontsource/montserrat/700.css"
 
+import type { AdaptiveListOwnerState, AdaptiveListProps } from "../AdaptiveList"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
+
+declare module "@mui/joy/styles" {
+  interface Components {
+    LevanaAdaptiveList?: {
+      defaultProps?: Partial<AdaptiveListProps<string>>
+      styleOverrides?: StyleOverrides<
+        keyof {
+          root?: React.ElementType
+        },
+        AdaptiveListOwnerState,
+        Theme
+      >
+    }
+  }
+}
 
 const dangerColor: ColorRange = {
   50: "#FEF2F7",
@@ -274,7 +290,7 @@ const dark = ((): ColorSystemOptions => {
       background,
       common,
       text,
-      divider: neutral.outlinedBorder,
+      divider: neutral[600],
       gradient: {
         primary: `linear-gradient(90deg, 
           ${specialPrimaryColor} 0%,
@@ -403,6 +419,18 @@ const theme = extendTheme({
     snackbar: 1000000, // Above Zendesk button
   },
   components: {
+    LevanaAdaptiveList: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& th": {
+            borderBottom: `1px solid ${theme.vars.palette.divider}`,
+          },
+          "& tr:first-of-type td": {
+            paddingTop: theme.spacing(2),
+          },
+        }),
+      },
+    },
     JoyAvatar: {
       styleOverrides: {
         root: {
@@ -529,12 +557,12 @@ const theme = extendTheme({
         checkbox: ({ ownerState, theme }) => ({
           backgroundColor: "unset",
           [`&.${checkboxClasses.checked}`]: {
-            "--Icon-color": theme.vars.palette.success[500],
+            "--Icon-color": theme.vars.palette.text.icon,
             "&:hover": {
-              "--Icon-color": theme.vars.palette.success[600],
+              opacity: 0.75,
             },
             "&:active": {
-              "--Icon-color": theme.vars.palette.success[700],
+              opacity: 0.5,
             },
           },
           "&:hover": {
@@ -591,6 +619,13 @@ const theme = extendTheme({
                 theme.vars.palette.primary[500],
             }),
           }),
+        }),
+      },
+    },
+    JoyDrawer: {
+      styleOverrides: {
+        content: ({ theme }) => ({
+          backgroundColor: theme.vars.palette.background.body,
         }),
       },
     },
@@ -868,7 +903,6 @@ const theme = extendTheme({
               "--variant-softHoverBg": theme.vars.palette.neutral.plainHoverBg,
               "--unstable_childRadius": "var(--ToggleButtonGroup-radius)",
               border: 0,
-              flex: 1,
             },
             [`& .${buttonClasses.root}[aria-pressed=true]`]: {
               backgroundColor: theme.vars.palette.background.level3,

@@ -18,6 +18,7 @@ import type {
   PaletteWarning,
 } from "@mui/joy/styles/types"
 
+import type { AdaptiveListOwnerState, AdaptiveListProps } from "../AdaptiveList"
 import type {
   ButtonSliderOwnerState,
   ButtonSliderProps,
@@ -29,6 +30,16 @@ import type { ColorRange, CssVarsData } from "./types"
 
 declare module "@mui/joy/styles" {
   interface Components {
+    LevanaAdaptiveList?: {
+      defaultProps?: Partial<AdaptiveListProps<string>>
+      styleOverrides?: StyleOverrides<
+        keyof {
+          root?: React.ElementType
+        },
+        AdaptiveListOwnerState,
+        Theme
+      >
+    }
     LevanaButtonSlider?: {
       defaultProps?: Partial<ButtonSliderProps>
       styleOverrides?: StyleOverrides<
@@ -487,6 +498,21 @@ const theme = extendTheme({
     snackbar: 1000000, // Above Zendesk button
   },
   components: {
+    LevanaAdaptiveList: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "--AdaptiveList-backgroundColor":
+            theme.vars.palette.background.level1,
+          "--AdaptiveList-headerBackgroundColor":
+            theme.vars.palette.background.body,
+          "--AdaptiveList-hoverBackgroundColor":
+            theme.vars.palette.neutral.plainHoverBg,
+          "--AdaptiveList-selectedBackgroundColor":
+            theme.vars.palette.neutral.plainActiveBg,
+          "--AdaptiveList-padding": theme.spacing(2),
+        }),
+      },
+    },
     LevanaButtonSlider: {
       styleOverrides: {
         root: ({ theme }) => ({
