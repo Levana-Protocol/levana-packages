@@ -151,7 +151,7 @@ const dark = ((): ColorSystemOptions => {
 
   const danger: Partial<PaletteDanger> = {
     ...dangerColor,
-    mainChannel: "237 105 160",
+    mainChannel: "229 57 53",
     outlinedActiveBg: dangerColor[700],
     outlinedBorder: dangerColor[700],
     outlinedColor: dangerColor[200],
