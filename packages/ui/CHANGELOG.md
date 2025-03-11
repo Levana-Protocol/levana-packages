@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.16
+
+### Patch Changes
+
+- 5406d9b: Adjust Rujira slider style
+
 ## 0.1.15
 
 ### Patch Changes
