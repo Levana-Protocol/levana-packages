@@ -785,13 +785,15 @@ const theme = extendTheme({
         root: ({ ownerState, theme }) => ({
           "--Slider-railBackground": theme.vars.palette.background.level3,
           "--Slider-thumbBackground": "var(--Slider-railBackground)",
+          "--Slider-thumbWidth": theme.spacing(2),
+          "--Slider-thumbSize": theme.spacing(2),
 
           [`&.${sliderClasses.disabled}, &:hover, &:active`]: {
             "--Slider-railBackground": theme.vars.palette.background.level3,
           },
 
           [`&.${sliderClasses.sizeLg}`]: {
-            "--Slider-trackSize": "8px",
+            "--Slider-trackSize": "4px",
           },
 
           ...(ownerState["data-special"] === true && {
