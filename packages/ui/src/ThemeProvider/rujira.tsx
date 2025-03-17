@@ -180,7 +180,7 @@ const dark = ((): ColorSystemOptions => {
     ...neutralColor,
     mainChannel: "115 103 166",
     outlinedActiveBg: neutralColor[700],
-    outlinedBorder: "#433B6A",
+    outlinedBorder: neutralColor[600],
     outlinedColor: neutralColor[200],
     outlinedDisabledBorder: neutralColor[800],
     outlinedDisabledColor: "#868388",
@@ -913,6 +913,19 @@ const theme = extendTheme({
               {
                 color: theme.vars.palette.text.secondary,
               },
+          }),
+          ...(ownerState.variant === "outlined" && {
+            "--ButtonGroup-separatorColor": "none",
+            "--ButtonGroup-separatorSize": "0",
+            "--variant-outlinedBorder": theme.vars.palette.divider,
+            [`& > .${buttonClasses.root}`]: {
+              '&[aria-pressed="true"]': {
+                "--variant-outlinedColor": "rgb(var(--active-color))",
+                border:
+                  "var(--variant-borderWidth) solid rgb(var(--active-color))",
+                backgroundColor: "rgba(var(--active-color), 0.1)",
+              },
+            },
           }),
         }),
       },
