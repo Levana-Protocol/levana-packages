@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.18
+
+### Patch Changes
+
+- 4bcc6d3: Rujira form styling
+
 ## 0.1.17
 
 ### Patch Changes
