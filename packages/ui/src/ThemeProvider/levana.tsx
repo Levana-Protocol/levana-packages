@@ -24,6 +24,16 @@ import type {
   ButtonSliderProps,
   ButtonSliderSlots,
 } from "../ButtonSlider/ButtonSliderProps"
+import type {
+  FormInputOwnerState,
+  FormInputProps,
+  FormInputSlots,
+} from "../FormInput/FormInputProps"
+import type {
+  FormToggleInputOwnerState,
+  FormToggleInputProps,
+  FormToggleInputSlots,
+} from "../FormToggleInput/FormToggleInputProps"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
@@ -45,6 +55,22 @@ declare module "@mui/joy/styles" {
       styleOverrides?: StyleOverrides<
         keyof ButtonSliderSlots,
         ButtonSliderOwnerState,
+        Theme
+      >
+    }
+    LevanaFormInput?: {
+      defaultProps?: Partial<FormInputProps>
+      styleOverrides?: StyleOverrides<
+        keyof FormInputSlots,
+        FormInputOwnerState,
+        Theme
+      >
+    }
+    LevanaFormToggleInput?: {
+      defaultProps?: Partial<FormToggleInputProps>
+      styleOverrides?: StyleOverrides<
+        keyof FormToggleInputSlots,
+        FormToggleInputOwnerState,
         Theme
       >
     }
@@ -521,8 +547,29 @@ const theme = extendTheme({
           borderRadius: theme.vars.radius.sm,
         }),
         buttonGroup: ({ theme }) => ({
+          "--ButtonGroup-radius": theme.vars.radius.lg,
           paddingTop: theme.spacing(0.5),
           paddingBottom: theme.spacing(1),
+        }),
+      },
+    },
+    LevanaFormInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "--FormInput-fontSize": theme.vars.fontSize.xl,
+          "--FormInput-fontWeight": theme.vars.fontWeight.lg,
+          "--FormInput-lineHeight": "2.25rem",
+          "--FormInputPrefix-fontSize": theme.vars.fontSize.md,
+          "--FormInputPrefix-fontWeight": theme.vars.fontWeight.md,
+          "--FormInputSuffix-fontSize": theme.vars.fontSize.md,
+          "--FormInputSuffix-fontWeight": theme.vars.fontWeight.md,
+        }),
+      },
+    },
+    LevanaFormToggleInput: {
+      styleOverrides: {
+        label: ({ theme }) => ({
+          fontSize: theme.vars.fontSize.xs,
         }),
       },
     },

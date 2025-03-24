@@ -28,7 +28,6 @@ const ButtonSliderButtonGroup = styled(ButtonGroup, {
   name,
   slot: "buttonGroup",
 })(({ theme, size }) => ({
-  "--ButtonGroup-radius": theme.vars.radius.lg,
   ...(size === "sm" && {
     "--Button-minHeight": theme.spacing(3),
     [`.${buttonClasses.root}`]: {

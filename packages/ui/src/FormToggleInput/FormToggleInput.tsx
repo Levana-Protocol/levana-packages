@@ -1,3 +1,4 @@
+import Box from "@mui/joy/Box"
 import IconButton from "@mui/joy/IconButton"
 import Typography, { typographyClasses } from "@mui/joy/Typography"
 import { styled, useThemeProps } from "@mui/joy/styles"
@@ -22,20 +23,51 @@ const FormToggleInputRoot = styled("div", {
   "--FormToggleInputToggle-size": "2rem",
   paddingBottom: theme.spacing(0.5),
   display: "grid",
-  gridTemplateColumns: ownerState.readOnly
-    ? "1fr"
-    : "1fr var(--FormToggleInputToggle-size)",
-  gridTemplateAreas: ownerState.readOnly
-    ? `
-        'input'
-        'label'
-      `
-    : `
-        'input toggle'
-        'label toggle'
-      `,
+  gridTemplateColumns: ((): string => {
+    switch (ownerState.layout) {
+      case undefined:
+      case "style1":
+        return ownerState.readOnly
+          ? "1fr"
+          : "1fr var(--FormToggleInputToggle-size)"
+      case "style2":
+        return ownerState.readOnly
+          ? "auto 1fr"
+          : "auto 1fr var(--FormToggleInputToggle-size)"
+    }
+  })(),
+  gridTemplateAreas: ((): string => {
+    switch (ownerState.layout) {
+      case undefined:
+      case "style1":
+        return ownerState.readOnly
+          ? `
+            'input'
+            'label'
+          `
+          : `
+            'input toggle'
+            'label toggle'
+          `
+      case "style2":
+        return ownerState.readOnly
+          ? `
+            'title input'
+            'title label'
+          `
+          : `
+            'title input toggle'
+            'title label toggle'
+          `
+    }
+  })(),
   columnGap: theme.spacing(1),
 }))
+
+const FormToggleInputTitle = styled("div", {
+  name,
+  slot: "title",
+})({})
 
 const FormToggleInputInput = styled(FormInput, {
   name,
@@ -49,7 +81,6 @@ const FormToggleInputLabel = styled(Typography, {
   slot: "label",
 })<{ ownerState: FormToggleInputOwnerState }>(({ theme, ownerState }) => ({
   gridArea: "label",
-  fontSize: theme.vars.fontSize.xs,
   color: ownerState.disabled
     ? theme.vars.palette.text.tertiary
     : theme.vars.palette.text.secondary,
@@ -82,6 +113,7 @@ const FormToggleInput = forwardRef<HTMLDivElement, FormToggleInputProps>(
       disabled,
       readOnly,
       issueType,
+      layout,
       ...externalForwardedProps
     } = otherProps
     const ownerState = {
@@ -90,12 +122,21 @@ const FormToggleInput = forwardRef<HTMLDivElement, FormToggleInputProps>(
       readOnly,
       toggled,
       issueType,
+      layout,
     }
 
     const [SlotRoot, rootProps] = useSlot("root", {
       ref,
       className: "root",
       elementType: FormToggleInputRoot,
+      ownerState,
+      externalForwardedProps,
+    })
+
+    const [SlotTitle] = useSlot("title", {
+      ref,
+      className: "title",
+      elementType: FormToggleInputTitle,
       ownerState,
       externalForwardedProps,
     })
@@ -131,6 +172,11 @@ const FormToggleInput = forwardRef<HTMLDivElement, FormToggleInputProps>(
 
     return (
       <SlotRoot {...rootProps}>
+        {props.slots?.title && (
+          <Box sx={{ gridArea: "title" }}>
+            <SlotTitle />
+          </Box>
+        )}
         <SlotInput
           value={top.value}
           onChange={top.onChange}

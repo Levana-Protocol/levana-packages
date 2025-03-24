@@ -6,6 +6,7 @@ import { listItemButtonClasses } from "@mui/joy/ListItemButton"
 import { listItemDecoratorClasses } from "@mui/joy/ListItemDecorator"
 import { sheetClasses } from "@mui/joy/Sheet"
 import { sliderClasses } from "@mui/joy/Slider"
+import { typographyClasses } from "@mui/joy/Typography"
 import { type StyleOverrides, type Theme, extendTheme } from "@mui/joy/styles"
 import type { ColorSystemOptions } from "@mui/joy/styles/extendTheme"
 import type {
@@ -27,6 +28,21 @@ import "@fontsource/montserrat/600.css"
 import "@fontsource/montserrat/700.css"
 
 import type { AdaptiveListOwnerState, AdaptiveListProps } from "../AdaptiveList"
+import type {
+  ButtonSliderOwnerState,
+  ButtonSliderProps,
+  ButtonSliderSlots,
+} from "../ButtonSlider/ButtonSliderProps"
+import type {
+  FormInputOwnerState,
+  FormInputProps,
+  FormInputSlots,
+} from "../FormInput/FormInputProps"
+import type {
+  FormToggleInputOwnerState,
+  FormToggleInputProps,
+  FormToggleInputSlots,
+} from "../FormToggleInput/FormToggleInputProps"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
@@ -40,6 +56,30 @@ declare module "@mui/joy/styles" {
           root?: React.ElementType
         },
         AdaptiveListOwnerState,
+        Theme
+      >
+    }
+    LevanaButtonSlider?: {
+      defaultProps?: Partial<ButtonSliderProps>
+      styleOverrides?: StyleOverrides<
+        keyof ButtonSliderSlots,
+        ButtonSliderOwnerState,
+        Theme
+      >
+    }
+    LevanaFormInput?: {
+      defaultProps?: Partial<FormInputProps>
+      styleOverrides?: StyleOverrides<
+        keyof FormInputSlots,
+        FormInputOwnerState,
+        Theme
+      >
+    }
+    LevanaFormToggleInput?: {
+      defaultProps?: Partial<FormToggleInputProps>
+      styleOverrides?: StyleOverrides<
+        keyof FormToggleInputSlots,
+        FormToggleInputOwnerState,
         Theme
       >
     }
@@ -431,6 +471,78 @@ const theme = extendTheme({
         }),
       },
     },
+    LevanaButtonSlider: {
+      styleOverrides: {
+        buttonGroup: ({ theme }) => ({
+          "--ButtonGroup-radius": theme.vars.radius.sm,
+        }),
+      },
+    },
+    LevanaFormInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "--FormInput-fontSize": theme.vars.fontSize.lg,
+          "--FormInput-fontWeight": "initial",
+          "--FormInput-lineHeight": "2.25rem",
+          "--FormInputPrefix-fontSize": theme.vars.fontSize.sm,
+          "--FormInputPrefix-fontWeight": "initial",
+          "--FormInputSuffix-fontSize": theme.vars.fontSize.sm,
+          "--FormInputSuffix-fontWeight": "initial",
+
+          [`& .${typographyClasses.root}`]: {
+            justifyContent: "right",
+            alignItems: "center",
+          },
+        }),
+        input: {
+          "--FormInput-gap": "4px",
+          [`& > * > .${typographyClasses.root}`]: {
+            justifyContent: "right",
+          },
+          [`& .${inputClasses.input}`]: {
+            textAlign: "right",
+          },
+        },
+      },
+    },
+    LevanaFormToggleInput: {
+      defaultProps: {
+        slotProps: {
+          toggle: {
+            variant: "plain",
+          },
+        },
+        sx: () => ({
+          p: 0,
+          "& > .input": {
+            pt: 0.5,
+          },
+          "& > .label": {
+            pb: 1,
+          },
+        }),
+      },
+      styleOverrides: {
+        input: {
+          "--FormInput-gap": "8px",
+          [`& > * > .${typographyClasses.root}`]: {
+            justifyContent: "right",
+          },
+          [`& .${inputClasses.input}`]: {
+            textAlign: "right",
+          },
+        },
+        label: ({ theme }) => ({
+          justifyContent: "right",
+          fontSize: theme.vars.fontSize.xs2,
+        }),
+        toggle: ({ theme }) => ({
+          "& > svg": {
+            fontSize: theme.fontSize.xl4,
+          },
+        }),
+      },
+    },
     JoyAvatar: {
       styleOverrides: {
         root: {
@@ -517,13 +629,21 @@ const theme = extendTheme({
 
           ...(ownerState["data-special"] === true && {
             "--variant-solidDisabledColor": theme.vars.palette.text.primary,
-            background: theme.palette.gradient.success,
             ...(ownerState.disabled && {
               opacity: 0.5,
             }),
-            "&:hover": {
-              background: specialBlueColor,
-            },
+            ...(ownerState.color === "success" && {
+              background: theme.palette.gradient.success,
+              "&:hover": {
+                background: specialBlueColor,
+              },
+            }),
+            ...(ownerState.color === "primary" && {
+              background: theme.palette.gradient.primary,
+              // "&:hover": {
+              //   background: specialBlueColor,
+              // },
+            }),
           }),
         }),
       },

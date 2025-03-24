@@ -14,16 +14,14 @@ const name = "LevanaFormInput"
 const FormInputRoot = styled("div", {
   name,
   slot: "root",
-})(({ theme }) => ({
-  "--FormInput-fontSize": theme.vars.fontSize.xl,
-  "--FormInput-fontWeight": theme.vars.fontWeight.lg,
-  "--FormInput-lineHeight": "2.25rem",
+})({
   "--FormInput-gap": "2px",
-  "--FormInputPrefix-fontSize": theme.vars.fontSize.md,
-  "--FormInputPrefix-fontWeight": theme.vars.fontWeight.md,
-  "--FormInputSuffix-fontSize": theme.vars.fontSize.md,
-  "--FormInputSuffix-fontWeight": theme.vars.fontWeight.md,
-}))
+})
+
+const FormInputTitle = styled("div", {
+  name,
+  slot: "title",
+})({})
 
 const FormInputInput = styled(Input, {
   name,
@@ -109,6 +107,14 @@ const FormInput = forwardRef<HTMLDivElement, FormInputProps>(
       externalForwardedProps: otherProps,
     })
 
+    const [SlotTitle] = useSlot("title", {
+      ref,
+      className: "title",
+      elementType: FormInputTitle,
+      ownerState,
+      externalForwardedProps: otherProps,
+    })
+
     const [SlotInput, inputProps] = useSlot("input", {
       ref,
       className: "input",
@@ -146,7 +152,15 @@ const FormInput = forwardRef<HTMLDivElement, FormInputProps>(
 
     return (
       <SlotRoot {...rootProps}>
-        <Box sx={{ position: "relative" }}>
+        <Box
+          sx={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {props.slots?.title && <SlotTitle />}
           {suffix && (
             <Typography
               sx={{

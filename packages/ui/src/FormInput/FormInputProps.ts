@@ -6,6 +6,7 @@ import type { OverrideProps } from "@mui/types"
 
 export interface FormInputSlots {
   root?: React.ElementType
+  title?: React.ElementType
   input?: React.ElementType
   prefixLabel?: React.ElementType
   suffixLabel?: React.ElementType
@@ -15,6 +16,7 @@ export type FormInputSlotsAndSlotProps = CreateSlotsAndSlotProps<
   FormInputSlots,
   {
     root: SlotProps<"div", object, FormInputOwnerState>
+    title: SlotProps<"div", object, FormInputOwnerState>
     input: SlotProps<typeof Input, object, FormInputOwnerState>
     prefixLabel: SlotProps<typeof Typography, object, FormInputOwnerState>
     suffixLabel: SlotProps<typeof Typography, object, FormInputOwnerState>

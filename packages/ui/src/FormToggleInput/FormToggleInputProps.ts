@@ -12,6 +12,7 @@ import type {
 
 export interface FormToggleInputSlots {
   root?: React.ElementType
+  title?: React.ElementType
   input?: React.ElementType
   label?: React.ElementType
   toggle?: React.ElementType
@@ -21,6 +22,10 @@ export type FormToggleInputSlotsAndSlotProps = CreateSlotsAndSlotProps<
   FormToggleInputSlots,
   {
     root: SlotProps<"div", object, FormToggleInputOwnerState>
+    /**
+     * Title is only used when `layout = "style2"`
+     */
+    title: SlotProps<"div", object, FormToggleInputOwnerState>
     input: SlotProps<typeof Input, object, FormToggleInputOwnerState>
     label: SlotProps<typeof Typography, object, FormToggleInputOwnerState>
     toggle: SlotProps<typeof IconButton, object, FormToggleInputOwnerState>
@@ -49,6 +54,7 @@ interface FormToggleInputTypeMap<
        * If the value is `undefined`, than the value will be managed internally.
        */
       toggled?: boolean
+      layout?: "style1" | "style2"
       sx?: SxProps
     }
   defaultComponent: D
