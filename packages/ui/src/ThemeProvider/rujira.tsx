@@ -534,7 +534,7 @@ const theme = extendTheme({
         },
         label: ({ theme }) => ({
           justifyContent: "right",
-          fontSize: theme.vars.fontSize.xs2,
+          fontSize: theme.vars.fontSize.xs3,
         }),
         toggle: ({ theme }) => ({
           "& > svg": {
