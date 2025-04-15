@@ -475,6 +475,10 @@ const theme = extendTheme({
       styleOverrides: {
         buttonGroup: ({ theme }) => ({
           "--ButtonGroup-radius": theme.vars.radius.sm,
+
+          [`& .${buttonClasses.root}`]: {
+            color: theme.vars.palette.text.primary,
+          },
         }),
       },
     },
