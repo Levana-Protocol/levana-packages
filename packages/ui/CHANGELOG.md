@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.19
+
+### Patch Changes
+
+- 24acda7: Change Rujira form label font size
+
 ## 0.1.18
 
 ### Patch Changes
