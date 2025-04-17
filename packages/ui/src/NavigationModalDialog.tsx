@@ -51,7 +51,10 @@ export interface NavigationModalRequiredProps {
 
 interface NavigationModalDialogTypeMap<
   P = object,
-  D extends React.ElementType = typeof ModalDialog,
+  // This is the expected type but it's causing some issues when moving the code
+  // into other repos.
+  // D extends React.ElementType = typeof ModalDialog,
+  D extends React.ElementType = "div",
 > {
   props: P &
     NavigationModalDialogSlotsAndSlotProps &
