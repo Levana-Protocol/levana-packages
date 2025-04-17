@@ -27,6 +27,7 @@ import "@fontsource/montserrat/500.css"
 import "@fontsource/montserrat/600.css"
 import "@fontsource/montserrat/700.css"
 
+import { modalCloseClasses } from "@mui/joy"
 import type { AdaptiveListOwnerState, AdaptiveListProps } from "../AdaptiveList"
 import type {
   ButtonSliderOwnerState,
@@ -43,6 +44,11 @@ import type {
   FormToggleInputProps,
   FormToggleInputSlots,
 } from "../FormToggleInput/FormToggleInputProps"
+import type {
+  NavigationModalOwnerState,
+  NavigationModalProps,
+  NavigationModalSlots,
+} from "../NavigationModal"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
@@ -80,6 +86,14 @@ declare module "@mui/joy/styles" {
       styleOverrides?: StyleOverrides<
         keyof FormToggleInputSlots,
         FormToggleInputOwnerState,
+        Theme
+      >
+    }
+    LevanaNavigationModal?: {
+      defaultProps?: Partial<NavigationModalProps>
+      styleOverrides?: StyleOverrides<
+        keyof NavigationModalSlots,
+        NavigationModalOwnerState,
         Theme
       >
     }
@@ -547,6 +561,64 @@ const theme = extendTheme({
         }),
       },
     },
+    LevanaNavigationModal: {
+      defaultProps: {
+        slotProps: {
+          dialog: {
+            slotProps: {
+              root: {
+                sx: () => ({
+                  backgroundColor: "#22242fd9",
+                  rowGap: "0.5rem",
+                }),
+              },
+              header: {
+                sx: ({ vars, typography, spacing }) => ({
+                  [`& > .${typographyClasses.root}`]: {
+                    ...typography["title-md"],
+                    textAlign: "left",
+                    "& > div": {
+                      display: "none",
+                    },
+                  },
+                  [`& > .${modalCloseClasses.root}`]: {
+                    ...typography.caption,
+                    "--Icon-fontSize": "28px",
+                    "--Icon-color": vars.palette.text.primary,
+                    fontWeight: vars.fontWeight.lg,
+                    top: spacing(-4),
+                    right: spacing(1),
+                    border: "none",
+                    p: 0,
+                    color: vars.palette.text.primary,
+                    "&:hover": {
+                      color: specialPrimaryColor,
+                      backgroundColor: "unset",
+                    },
+                    "&:after": {
+                      display: "block",
+                      content: "'Close'",
+                    },
+                    "& > svg": {
+                      pr: 1,
+                    },
+                  },
+                }),
+              },
+              content: {
+                sx: ({ vars, typography }) => ({
+                  [`& .${typographyClasses.root}`]: {
+                    ...typography["body-md"],
+                    textAlign: "left",
+                    color: vars.palette.text.primary,
+                  },
+                }),
+              },
+            },
+          },
+        },
+      },
+    },
     JoyAvatar: {
       styleOverrides: {
         root: {
@@ -847,20 +919,14 @@ const theme = extendTheme({
         }),
       },
     },
-    JoyModalClose: {
-      styleOverrides: {
-        root: {
-          "--variant-borderWidth": "2px",
-        },
-      },
-    },
     JoyModalDialog: {
       styleOverrides: {
         root: ({ theme }) => ({
           "--ModalDialog-maxWidth": "550px",
           "--ModalDialog-minWidth": "550px",
           "--ModalDialog-radius": theme.vars.radius.xl,
-          "--ModalContent-maxWidth": "400px",
+          "--ModalContent-maxWidth":
+            "calc(var(--ModalDialog-maxWidth) - (var(--ModalContent-padding) * 2))",
           "--ModalContent-padding": theme.spacing(3),
           backgroundColor: theme.vars.palette.background.surface,
           padding: 0,

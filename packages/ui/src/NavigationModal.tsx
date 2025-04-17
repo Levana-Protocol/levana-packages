@@ -27,7 +27,7 @@ import PreventUnmounting from "./PreventUnmounting"
 import type { OmitComponentProps } from "./types"
 import { muiMergeSx } from "./utils/mui"
 
-interface NavigationModalSlots {
+export interface NavigationModalSlots {
   root?: React.ElementType
   dialog?: React.ElementType
 }
@@ -64,7 +64,7 @@ export type NavigationModalProps<
   P = { component?: React.ElementType },
 > = OverrideProps<NavigationModalTypeMap<P, D>, D>
 
-type NavigationModalOwnerState = NavigationModalProps
+export type NavigationModalOwnerState = NavigationModalProps
 
 const name = "LevanaNavigationModal"
 
