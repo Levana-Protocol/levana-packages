@@ -4,6 +4,7 @@ import { inputClasses } from "@mui/joy/Input"
 import { listDividerClasses } from "@mui/joy/ListDivider"
 import { listItemButtonClasses } from "@mui/joy/ListItemButton"
 import { listItemDecoratorClasses } from "@mui/joy/ListItemDecorator"
+import { modalCloseClasses } from "@mui/joy/ModalClose"
 import { sheetClasses } from "@mui/joy/Sheet"
 import { sliderClasses } from "@mui/joy/Slider"
 import { typographyClasses } from "@mui/joy/Typography"
@@ -27,7 +28,6 @@ import "@fontsource/montserrat/500.css"
 import "@fontsource/montserrat/600.css"
 import "@fontsource/montserrat/700.css"
 
-import { modalCloseClasses } from "@mui/joy"
 import type { AdaptiveListOwnerState, AdaptiveListProps } from "../AdaptiveList"
 import type {
   ButtonSliderOwnerState,
@@ -581,13 +581,12 @@ const theme = extendTheme({
                       display: "none",
                     },
                   },
-                  [`& > .${modalCloseClasses.root}`]: {
+                  "& > button": {
                     ...typography.caption,
                     "--Icon-fontSize": "28px",
                     "--Icon-color": vars.palette.text.primary,
                     fontWeight: vars.fontWeight.lg,
                     top: spacing(-4),
-                    right: spacing(1),
                     border: "none",
                     p: 0,
                     color: vars.palette.text.primary,
@@ -597,10 +596,17 @@ const theme = extendTheme({
                     },
                     "&:after": {
                       display: "block",
-                      content: "'Close'",
+                      content: "'Back'",
                     },
                     "& > svg": {
                       pr: 1,
+                    },
+                  },
+                  [`& > .${modalCloseClasses.root}`]: {
+                    right: spacing(1),
+                    "&:after": {
+                      display: "block",
+                      content: "'Close'",
                     },
                   },
                 }),

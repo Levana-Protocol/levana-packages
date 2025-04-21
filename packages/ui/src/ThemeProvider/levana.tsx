@@ -34,6 +34,11 @@ import type {
   FormToggleInputProps,
   FormToggleInputSlots,
 } from "../FormToggleInput/FormToggleInputProps"
+import type {
+  NavigationModalHeaderOwnerState,
+  NavigationModalHeaderProps,
+  NavigationModalHeaderSlots,
+} from "../NavigationModalHeader"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
@@ -71,6 +76,14 @@ declare module "@mui/joy/styles" {
       styleOverrides?: StyleOverrides<
         keyof FormToggleInputSlots,
         FormToggleInputOwnerState,
+        Theme
+      >
+    }
+    LevanaNavigationModalHeader?: {
+      defaultProps?: Partial<NavigationModalHeaderProps>
+      styleOverrides?: StyleOverrides<
+        keyof NavigationModalHeaderSlots,
+        NavigationModalHeaderOwnerState,
         Theme
       >
     }
@@ -571,6 +584,15 @@ const theme = extendTheme({
         label: ({ theme }) => ({
           fontSize: theme.vars.fontSize.xs,
         }),
+      },
+    },
+    LevanaNavigationModalHeader: {
+      styleOverrides: {
+        root: {
+          "--IconButton-size": "40px",
+          "--IconButton-radius": "calc(var(--IconButton-size) / 2)",
+          "--ModalClose-radius": "var(--IconButton-radius)",
+        },
       },
     },
     JoyAvatar: {

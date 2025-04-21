@@ -9,7 +9,7 @@ import { forwardRef } from "react"
 
 import ArrowBackIcon from "./icons/ArrowBackIcon"
 
-interface NavigationModalHeaderSlots {
+export interface NavigationModalHeaderSlots {
   root?: React.ElementType
   close?: React.ElementType
 }
@@ -42,7 +42,7 @@ export type NavigationModalHeaderProps<
   P = { component?: React.ElementType },
 > = OverrideProps<NavigationModalHeaderTypeMap<P, D>, D>
 
-type NavigationModalHeaderOwnerState = NavigationModalHeaderProps
+export type NavigationModalHeaderOwnerState = NavigationModalHeaderProps
 
 const name = "LevanaNavigationModalHeader"
 
@@ -50,9 +50,6 @@ const NavigationModalHeaderRoot = styled("div", {
   name,
   slot: "root",
 })({
-  "--IconButton-size": "40px",
-  "--IconButton-radius": "calc(var(--IconButton-size) / 2)",
-  "--ModalClose-radius": "var(--IconButton-radius)",
   textAlign: "center",
   paddingTop: "var(--ModalContent-padding)",
   paddingInline: "var(--ModalContent-padding)",
