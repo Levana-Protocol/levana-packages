@@ -1,5 +1,12 @@
 # @levana-protocol/ui
 
+## 0.1.20
+
+### Patch Changes
+
+- 83d6569: Update Rujira tabs text color
+- 648c1ec: Modal style updates
+
 ## 0.1.19
 
 ### Patch Changes
