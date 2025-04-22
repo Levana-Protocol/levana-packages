@@ -10,6 +10,7 @@ import { type PropsWithChildren, useEffect, useRef, useState } from "react"
 import type Sortable from "sortablejs"
 
 import NavigationModal, { NavigationModalDynamicItem } from "./NavigationModal"
+import NavigationModalFooter from "./NavigationModalFooter"
 
 export interface AdaptiveListOptionsItem<Id extends string> {
   id: Id
@@ -89,11 +90,10 @@ const AdaptiveListOptionsModal = <
               <DropdownOption locale={props.locale} {...dropdownOption} />
             )}
             {props.children}
-            <Stack direction="column" spacing={1}>
+            <NavigationModalFooter>
               <Button
                 variant="solid"
                 color="primary"
-                fullWidth
                 disabled={!isDirty}
                 onClick={() => {
                   props.onUpdate(
@@ -108,7 +108,6 @@ const AdaptiveListOptionsModal = <
               <Button
                 variant="outlined"
                 color="neutral"
-                fullWidth
                 onClick={() => {
                   props.onReset()
                   modal.close()
@@ -116,7 +115,7 @@ const AdaptiveListOptionsModal = <
               >
                 {props.locale?.reset ?? "Reset"}
               </Button>
-            </Stack>
+            </NavigationModalFooter>
           </Stack>
         </NavigationModalDynamicItem>
       )}
