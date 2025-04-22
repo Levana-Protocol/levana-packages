@@ -75,6 +75,10 @@
       "types": "./src/NavigationModalDialog.tsx",
       "default": "./dist/NavigationModalDialog.js"
     },
+    "./NavigationModalFooter": {
+      "types": "./src/NavigationModalFooter.tsx",
+      "default": "./dist/NavigationModalFooter.js"
+    },
     "./RiskBars": {
       "types": "./src/RiskBars.tsx",
       "default": "./dist/RiskBars.js"

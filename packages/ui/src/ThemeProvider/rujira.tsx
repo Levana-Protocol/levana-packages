@@ -49,6 +49,11 @@ import type {
   NavigationModalProps,
   NavigationModalSlots,
 } from "../NavigationModal"
+import type {
+  NavigationModalFooterOwnerState,
+  NavigationModalFooterProps,
+  NavigationModalFooterSlots,
+} from "../NavigationModalFooter"
 import CheckedIcon from "../icons/CheckedIcon"
 import UncheckedIcon from "../icons/UncheckedIcon"
 import type { ColorRange, CssVarsData } from "./types"
@@ -94,6 +99,14 @@ declare module "@mui/joy/styles" {
       styleOverrides?: StyleOverrides<
         keyof NavigationModalSlots,
         NavigationModalOwnerState,
+        Theme
+      >
+    }
+    LevanaNavigationModalFooter?: {
+      defaultProps?: Partial<NavigationModalFooterProps>
+      styleOverrides?: StyleOverrides<
+        keyof NavigationModalFooterSlots,
+        NavigationModalFooterOwnerState,
         Theme
       >
     }
@@ -623,6 +636,20 @@ const theme = extendTheme({
             },
           },
         },
+      },
+    },
+    LevanaNavigationModalFooter: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          marginLeft: "calc(var(--ModalContent-horizontalPadding) * -1)",
+          marginBottom: "calc(var(--ModalContent-horizontalPadding) * -1)",
+          marginRight: "calc(var(--ModalContent-horizontalPadding) * -1)",
+          backgroundColor: theme.vars.palette.background.body,
+          padding: theme.spacing(2, 3),
+          borderBottomLeftRadius: theme.vars.radius.lg,
+          borderBottomRightRadius: theme.vars.radius.lg,
+          flexDirection: "row-reverse",
+        }),
       },
     },
     JoyAvatar: {

@@ -35,6 +35,11 @@ import type {
   FormToggleInputSlots,
 } from "../FormToggleInput/FormToggleInputProps"
 import type {
+  NavigationModalFooterOwnerState,
+  NavigationModalFooterProps,
+  NavigationModalFooterSlots,
+} from "../NavigationModalFooter"
+import type {
   NavigationModalHeaderOwnerState,
   NavigationModalHeaderProps,
   NavigationModalHeaderSlots,
@@ -84,6 +89,14 @@ declare module "@mui/joy/styles" {
       styleOverrides?: StyleOverrides<
         keyof NavigationModalHeaderSlots,
         NavigationModalHeaderOwnerState,
+        Theme
+      >
+    }
+    LevanaNavigationModalFooter?: {
+      defaultProps?: Partial<NavigationModalFooterProps>
+      styleOverrides?: StyleOverrides<
+        keyof NavigationModalFooterSlots,
+        NavigationModalFooterOwnerState,
         Theme
       >
     }
@@ -592,6 +605,16 @@ const theme = extendTheme({
           "--IconButton-size": "40px",
           "--IconButton-radius": "calc(var(--IconButton-size) / 2)",
           "--ModalClose-radius": "var(--IconButton-radius)",
+        },
+      },
+    },
+    LevanaNavigationModalFooter: {
+      styleOverrides: {
+        root: {
+          flexDirection: "column",
+          [`& > .${buttonClasses.root}`]: {
+            width: "100%",
+          },
         },
       },
     },
