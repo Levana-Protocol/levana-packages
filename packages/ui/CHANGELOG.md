@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.21
+
+### Patch Changes
+
+- 937dd93: Fix adaptive list modal
+
 ## 0.1.20
 
 ### Patch Changes
