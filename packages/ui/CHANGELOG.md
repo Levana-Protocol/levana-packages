@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.22
+
+### Patch Changes
+
+- 93ff418: Fix modal content color
+
 ## 0.1.21
 
 ### Patch Changes
