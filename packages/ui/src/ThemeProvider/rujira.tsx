@@ -624,15 +624,6 @@ const theme = extendTheme({
                   },
                 }),
               },
-              content: {
-                sx: ({ vars, typography }) => ({
-                  [`& .${typographyClasses.root}`]: {
-                    ...typography["body-md"],
-                    textAlign: "left",
-                    color: vars.palette.text.primary,
-                  },
-                }),
-              },
             },
           },
         },
