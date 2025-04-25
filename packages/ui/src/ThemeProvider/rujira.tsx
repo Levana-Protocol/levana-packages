@@ -50,6 +50,11 @@ import type {
   NavigationModalSlots,
 } from "../NavigationModal"
 import type {
+  NavigationModalDialogOwnerState,
+  NavigationModalDialogProps,
+  NavigationModalDialogSlots,
+} from "../NavigationModalDialog"
+import type {
   NavigationModalFooterOwnerState,
   NavigationModalFooterProps,
   NavigationModalFooterSlots,
@@ -99,6 +104,14 @@ declare module "@mui/joy/styles" {
       styleOverrides?: StyleOverrides<
         keyof NavigationModalSlots,
         NavigationModalOwnerState,
+        Theme
+      >
+    }
+    LevanaNavigationModalDialog?: {
+      defaultProps?: Partial<NavigationModalDialogProps>
+      styleOverrides?: StyleOverrides<
+        keyof NavigationModalDialogSlots,
+        NavigationModalDialogOwnerState,
         Theme
       >
     }
@@ -627,6 +640,11 @@ const theme = extendTheme({
             },
           },
         },
+      },
+    },
+    LevanaNavigationModalDialog: {
+      defaultProps: {
+        centerBreakpoint: "xs",
       },
     },
     LevanaNavigationModalFooter: {

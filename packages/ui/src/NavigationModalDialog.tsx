@@ -18,7 +18,7 @@ import HelperButton, { type HelperButtonAction } from "./HelperButton"
 import NavigationModalHeader from "./NavigationModalHeader"
 import PreventUnmounting from "./PreventUnmounting"
 
-interface NavigationModalDialogSlots {
+export interface NavigationModalDialogSlots {
   root?: React.ElementType
   header?: React.ElementType
   content?: React.ElementType
@@ -81,7 +81,7 @@ export type NavigationModalDialogProps<
   P = { component?: React.ElementType },
 > = OverrideProps<NavigationModalDialogTypeMap<P, D>, D>
 
-type NavigationModalDialogOwnerState = NavigationModalDialogProps & {
+export type NavigationModalDialogOwnerState = NavigationModalDialogProps & {
   centerBreakpoint: Breakpoint
 }
 
