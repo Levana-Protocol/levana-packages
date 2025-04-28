@@ -601,7 +601,8 @@ const theme = extendTheme({
               header: {
                 sx: ({ vars, typography, spacing }) => ({
                   [`& > .${typographyClasses.root}`]: {
-                    ...typography["title-md"],
+                    fontSize: vars.fontSize.xl5,
+                    fontWeight: "unset",
                     textAlign: "left",
                     "& > div": {
                       display: "none",
