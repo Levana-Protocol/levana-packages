@@ -1,5 +1,12 @@
 # @levana-protocol/ui
 
+## 0.1.23
+
+### Patch Changes
+
+- 154409d: Rujira modal should never fullscreen
+- f102c7a: Update Rujira modal title style
+
 ## 0.1.22
 
 ### Patch Changes
