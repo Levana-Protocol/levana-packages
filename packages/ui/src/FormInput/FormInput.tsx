@@ -16,6 +16,7 @@ const FormInputRoot = styled("div", {
   slot: "root",
 })({
   "--FormInput-gap": "2px",
+  width: "100%",
 })
 
 const FormInputTitle = styled("div", {
