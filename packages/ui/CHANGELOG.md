@@ -1,5 +1,12 @@
 # @levana-protocol/ui
 
+## 0.1.24
+
+### Patch Changes
+
+- a56892d: Update collateral input width
+- 611d6d9: Fix button group default outlined border
+
 ## 0.1.23
 
 ### Patch Changes
