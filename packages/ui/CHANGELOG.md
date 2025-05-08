@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.25
+
+### Patch Changes
+
+- bd0613e: Fix form input width
+
 ## 0.1.24
 
 ### Patch Changes
