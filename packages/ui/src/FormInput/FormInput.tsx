@@ -36,6 +36,7 @@ const FormInputInput = styled(Input, {
   lineHeight: "var(--FormInput-lineHeight)",
   letterSpacing: "normal",
   alignItems: "baseline",
+  width: "100%",
 
   [`.${inputClasses.root}`]: {
     color: "var(--FormAssetField-color)",

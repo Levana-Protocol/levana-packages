@@ -21,6 +21,7 @@ const FormToggleInputRoot = styled("div", {
   slot: "root",
 })<{ ownerState: FormToggleInputOwnerState }>(({ theme, ownerState }) => ({
   "--FormToggleInputToggle-size": "2rem",
+  width: "100%",
   paddingBottom: theme.spacing(0.5),
   display: "grid",
   gridTemplateColumns: ((): string => {
