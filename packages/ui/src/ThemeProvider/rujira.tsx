@@ -1151,6 +1151,7 @@ const theme = extendTheme({
             "--ButtonGroup-separatorColor": "none",
             "--ButtonGroup-separatorSize": "0",
             "--variant-outlinedBorder": theme.vars.palette.divider,
+            "--active-color": "113, 144, 159",
             [`& > .${buttonClasses.root}`]: {
               '&[aria-pressed="true"]': {
                 "--variant-outlinedColor": "rgb(var(--active-color))",
