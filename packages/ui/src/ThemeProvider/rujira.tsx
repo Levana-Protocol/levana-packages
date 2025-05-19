@@ -926,6 +926,20 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyListItem: {
+      styleOverrides: {
+        root: ({ ownerState }) => ({
+          ...(ownerState.variant === "soft" && {
+            "--ListItem-paddingLeft": "0px",
+            "--ListItem-paddingRight": "0px",
+            "--ListItem-marginInline": "0.5rem",
+            "--ListItem-startActionWidth": "0.5rem",
+            "--ListItem-endActionWidth": "0.5rem",
+            marginInlineStart: 0,
+          }),
+        }),
+      },
+    },
     JoyListItemButton: {
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
