@@ -1,5 +1,12 @@
 # @levana-protocol/ui
 
+## 0.1.25
+
+### Patch Changes
+
+- 7252d23: Update Rujira soft tabs
+- bd0613e: Fix form input width
+
 ## 0.1.24
 
 ### Patch Changes
