@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.26
+
+### Patch Changes
+
+- 0e7134b: Add variant to AdaptiveList
+
 ## 0.1.25
 
 ### Patch Changes
