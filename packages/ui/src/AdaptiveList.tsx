@@ -1,16 +1,17 @@
 import Box, { type BoxProps } from "@mui/joy/Box"
 import { buttonClasses } from "@mui/joy/Button"
 import { checkboxClasses } from "@mui/joy/Checkbox"
+import IconButton from "@mui/joy/IconButton"
 import Stack from "@mui/joy/Stack"
 import SvgIcon, { type SvgIconProps } from "@mui/joy/SvgIcon"
 import Typography from "@mui/joy/Typography"
 import { type Theme, styled } from "@mui/joy/styles"
+import type { DefaultVariantProp } from "@mui/joy/styles/types"
 import type { Breakpoint } from "@mui/system/createTheme"
 import type { SystemStyleObject } from "@mui/system/styleFunctionSx"
 import type React from "react"
 import { Fragment, useEffect, useState } from "react"
 
-import { IconButton } from "@mui/joy"
 import HelperButton, { type HelperButtonModalProps } from "./HelperButton"
 
 type AdaptiveListHelperButtonAction =
@@ -80,6 +81,7 @@ export interface AdaptiveListProps<Id extends string>
    * The items can be thought of as table rows.
    */
   items: (Record<Id, AdaptiveListItem> & AdaptiveListReservedItem)[]
+  variant?: Extract<DefaultVariantProp, "plain" | "soft">
 }
 
 export interface AdaptiveListReservedItem {
@@ -102,6 +104,7 @@ export interface AdaptiveListOwnerState {
    * @default lg
    */
   minTableLayout: Breakpoint
+  variant?: AdaptiveListProps<"">["variant"]
 }
 
 interface AdaptiveListContentOwnerState extends AdaptiveListOwnerState {
@@ -118,6 +121,17 @@ const AdaptiveListRoot = styled("table", {
   "--AdaptiveList-columnGap": theme.spacing(1),
   "--AdaptiveList-rowGap": theme.spacing(1),
   "--AdaptiveList-borderRadius": theme.vars.radius.md,
+
+  ...(ownerState.variant === "soft" && {
+    "--AdaptiveList-padding": theme.spacing(2),
+    "--AdaptiveList-backgroundColor": theme.vars.palette.background.level1,
+    "--AdaptiveList-hoverBackgroundColor":
+      theme.vars.palette.neutral.plainHoverBg,
+    "--AdaptiveList-selectedBackgroundColor":
+      theme.vars.palette.neutral.plainActiveBg,
+    "--AdaptiveList-headerBackgroundColor": theme.vars.palette.background.body,
+  }),
+
   [theme.breakpoints.down(ownerState.minTableLayout)]: {
     "&, & tbody": {
       display: "block",
@@ -278,8 +292,8 @@ const AdaptiveListStack = styled(Stack, {
 }))
 
 const AdaptiveList = <Id extends string>(props: AdaptiveListProps<Id>) => {
-  const { sections, items, minTableLayout = "lg", sx } = props
-  const ownerState = { minTableLayout }
+  const { sections, items, minTableLayout = "lg", variant, sx } = props
+  const ownerState = { minTableLayout, variant }
 
   const sectionForId = (id: string) => {
     return sections.find((section) => section.id === id)
