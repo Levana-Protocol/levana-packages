@@ -600,7 +600,7 @@ const theme = extendTheme({
               },
               header: {
                 sx: ({ vars, typography, spacing }) => ({
-                  [`& > .${typographyClasses.root}`]: {
+                  [`& > h3.${typographyClasses.root}`]: {
                     fontSize: vars.fontSize.xl5,
                     fontWeight: "unset",
                     textAlign: "left",
