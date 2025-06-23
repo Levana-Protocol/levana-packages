@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.27
+
+### Patch Changes
+
+- 529e903: Fix nav modal header font sizes
+
 ## 0.1.26
 
 ### Patch Changes
