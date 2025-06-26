@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.28
+
+### Patch Changes
+
+- 8fc4982: Add css var for the AdaptiveListFooter
+
 ## 0.1.27
 
 ### Patch Changes
