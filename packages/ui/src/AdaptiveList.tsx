@@ -172,7 +172,8 @@ const AdaptiveListRoot = styled("table", {
   "& tbody .footer td": {
     paddingBottom: "var(--AdaptiveList-rowGap)",
     "& > *": {
-      paddingTop: "var(--AdaptiveList-padding)",
+      paddingTop:
+        "var(--AdaptiveListFooter-paddingTop, --AdaptiveList-padding)",
     },
   },
 }))
