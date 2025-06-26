@@ -1,5 +1,11 @@
 # @levana-protocol/ui
 
+## 0.1.29
+
+### Patch Changes
+
+- 9cb0a10: Fix css var
+
 ## 0.1.28
 
 ### Patch Changes
