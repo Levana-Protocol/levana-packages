@@ -2,6 +2,8 @@
 
 Shared packages for Levana development.
 
+> ⚠️ **Warning:** This repository is no longer maintained. All packages previously in this repo have been moved to the perps monorepo.
+
 ## Local Development
 
 Test recent changes locally to ensure everything works as expected before publishing.
